@@ -33,7 +33,7 @@ alias vim='nvim'
 
 
 # compsys: zsh.sourceforge.net/Guide/zshguide06.html
-setopt COMPLETE_IN_WORD
+setopt COMPLETE_IN_WORD MAGIC_EQUAL_SUBST
 zstyle ':completion:*' add-space true
 zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate _prefix
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
