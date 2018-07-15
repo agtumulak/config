@@ -1,7 +1,7 @@
 # Config
 Intended for use with [stow][1]
 
-```shell
+```console
 $ stow --dir=path/to/repo --target=${HOME} tmux vim
 ```
 
