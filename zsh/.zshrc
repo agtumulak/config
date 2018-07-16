@@ -16,14 +16,8 @@ bindkey '^?' backward-delete-char # superuser.com/a/533685
 bindkey '^R' history-incremental-search-backward # stackoverflow.com/q/3127392
 
 
-# anaconda: hashrocket.com/blog/posts/keep-anaconda-from-constricting-your-homebrew-installs
-brew (){
-  local original_path="${PATH}"
-  local sans_anaconda="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-  export PATH="${sans_anaconda}" && echo "PATH=${PATH}"
-  command brew "$@"
-  export PATH="${original_path}" && echo "PATH=${PATH}"
-}
+# anaconda
+source /usr/local/miniconda3/etc/profile.d/conda.sh
  
  
 # aliases
@@ -55,6 +49,7 @@ autoload -U promptinit
 promptinit
 prompt pure
 PROMPT='%}%(12V.%F{242}%12v%f .)%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+RPROMPT='${CONDA_PROMPT_MODIFIER}'
 
 
 # syntax highlighting: github.com/zsh-users/zsh-syntax-highlighting
@@ -65,5 +60,5 @@ source "${DEV_PATH}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 if [ "$TMUX" = "" ]; then
     exec tmux attach-session
 else
-    export PATH="/usr/local/miniconda3/bin:$PATH"
+    export PATH="$PATH"
 fi
