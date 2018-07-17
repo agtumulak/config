@@ -41,3 +41,7 @@ set updatetime=250
 
 " stackoverflow.com/a/30691754
 set clipboard=unnamedplus
+
+
+" keymappings
+map <Space> <Leader>
