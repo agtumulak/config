@@ -2,6 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
+Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
 call plug#end()
 
@@ -19,6 +20,11 @@ nmap <leader>7 <Plug>BufTabLine.Go(7)
 nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+
+" vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
+let g:vimtex_view_method='skim' " PDF-Tex Sync: nvr --remote-silent %file -c %line
+let g:vimtex_compiler_progname='/usr/local/miniconda3/bin/nvr'
 
 
 " github.com/morhetz/gruvbox
