@@ -23,7 +23,7 @@ nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 
 " vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
-let g:vimtex_view_method='skim' " PDF-Tex Sync: nvr --remote-silent %file -c %line
+let g:vimtex_view_method='skim' " PDF-Tex Sync: /usr/local/miniconda3/bin/nvr --remote-silent %file -c %line
 let g:vimtex_compiler_progname='/usr/local/miniconda3/bin/nvr'
 
 
