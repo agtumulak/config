@@ -46,6 +46,9 @@ set mouse=a
 set colorcolumn=80
 set updatetime=250
 
+" stackoverflow.com/a/4617156/5101335
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 " stackoverflow.com/a/30691754
 set clipboard=unnamedplus
