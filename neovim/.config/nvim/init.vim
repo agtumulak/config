@@ -52,6 +52,10 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 
+" stackoverflow.com/a/13216072/5101335
+set wildmode=longest:full,full
+
+
 " stackoverflow.com/a/30691754
 set clipboard=unnamedplus
 
