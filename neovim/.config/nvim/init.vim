@@ -23,8 +23,8 @@ nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 
-" github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim#using-virtual-environments
-let g:python3_host_prog = '/usr/local/bin/python3'
+" valloric.github.io/YouCompleteMe/#python-semantic-completion
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 
 " vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
