@@ -1,5 +1,6 @@
 " vim plug
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'Valloric/YouCompleteMe', {'do': '/usr/local/bin/python3 install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
 Plug 'lervag/vimtex'
@@ -20,6 +21,10 @@ nmap <leader>7 <Plug>BufTabLine.Go(7)
 nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+
+" github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim#using-virtual-environments
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 
 " vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
