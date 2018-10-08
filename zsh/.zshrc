@@ -3,7 +3,7 @@ export DEV_PATH="/Users/atumulak/Developer"
 export SHELL="/usr/local/bin/zsh"
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 
- 
+
 # zsh
 setopt appendhistory beep extendedglob nomatch
 HISTFILE=~/.zsh_history
@@ -18,8 +18,8 @@ bindkey '^R' history-incremental-search-backward # stackoverflow.com/q/3127392
 
 # anaconda
 source /usr/local/miniconda3/etc/profile.d/conda.sh
- 
- 
+
+
 # aliases
 alias ls='ls -FGh'
 alias ll='ls -al'
