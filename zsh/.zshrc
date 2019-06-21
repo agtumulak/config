@@ -30,7 +30,7 @@ alias vim='nvim'
 setopt COMPLETE_IN_WORD MAGIC_EQUAL_SUBST
 zstyle ':completion:*' add-space true
 zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate _prefix
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # github.com/robbyrussell/oh-my-zsh/issues/1563
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu 'select'
 zstyle ':completion:*' format 'completing: %d'
