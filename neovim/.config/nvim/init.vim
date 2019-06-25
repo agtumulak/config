@@ -13,10 +13,6 @@ call plug#end()
 map <Leader><space> :Files<CR>
 
 
-" valloric.github.io/YouCompleteMe/#python-semantic-completion
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
-
-
 " vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
 let g:vimtex_view_method='skim' " PDF-Tex Sync: nvr --remote-silent %file -c %line
 let g:vimtex_compiler_progname='nvr'
