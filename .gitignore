@@ -1,1 +1,3 @@
 .netrwhist
+ssh/.ssh/*
+!ssh/.ssh/config
