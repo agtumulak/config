@@ -55,9 +55,3 @@ zstyle ':prompt:pure:prompt:success' color 'green'
 source "${DEV_PATH}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 
-# tmux: stackoverflow.com/a/13060475
-if [ "$TMUX" = "" ]; then
-    exec tmux attach-session
-else
-    export PATH="$PATH"
-fi
