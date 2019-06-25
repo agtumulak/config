@@ -48,8 +48,7 @@ fpath+="${DEV_PATH}/pure"
 autoload -U promptinit
 promptinit
 prompt pure
-PROMPT='%}%(12V.%F{242}%12v%f .)%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
-RPROMPT='${CONDA_PROMPT_MODIFIER}'
+zstyle ':prompt:pure:prompt:success' color 'green'
 
 
 # syntax highlighting: github.com/zsh-users/zsh-syntax-highlighting
