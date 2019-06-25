@@ -24,6 +24,11 @@ let g:vimtex_compiler_progname='nvr'
 " backward search: Command-Shift-Click
 
 
+" neovim.io/doc/user/provider.html#python-virtualenv
+let g:python_host_prog  = '/usr/local/miniconda3/envs/neovim-py2/bin/python'
+let g:python3_host_prog = '/usr/local/miniconda3/envs/neovim-py3/bin/python'
+
+
 " github.com/morhetz/gruvbox
 colorscheme gruvbox
 set background=dark
