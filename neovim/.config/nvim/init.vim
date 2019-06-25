@@ -1,6 +1,6 @@
 " vim plug
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Valloric/YouCompleteMe', {'do': '/usr/local/bin/python3 install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
