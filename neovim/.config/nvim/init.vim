@@ -6,7 +6,12 @@ Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'ericcurtin/CurtineIncSw.vim'
 call plug#end()
+
+
+" CurtineINcSw
+map <C-h> :call CurtineIncSw()<CR>
 
 
 " fzf
