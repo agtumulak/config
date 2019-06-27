@@ -10,6 +10,11 @@ Plug 'ericcurtin/CurtineIncSw.vim'
 call plug#end()
 
 
+" clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
+map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+
+
 " CurtineINcSw
 map <C-h> :call CurtineIncSw()<CR>
 
