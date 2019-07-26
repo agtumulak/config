@@ -16,6 +16,7 @@ map <Leader>f :YcmCompleter FixIt<CR>
 map <Leader>t :YcmCompleter GetType<CR>
 map <Leader>df :YcmCompleter GoToDefinition<CR>
 map <Leader>dc :YcmCompleter GoToDeclaration<CR>
+let g:ycm_autoclose_preview_window_after_completion='1'
 
 
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
