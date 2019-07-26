@@ -68,3 +68,7 @@ set clipboard=unnamedplus
 
 " keymappings
 map <Space> <Leader>
+
+
+" stackoverflow.com/a/657484/5101335
+map <Leader>/ :noh<CR>
