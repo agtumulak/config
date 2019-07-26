@@ -10,6 +10,14 @@ Plug 'ericcurtin/CurtineIncSw.vim'
 call plug#end()
 
 
+" YouCompleteMe
+map <Leader>r :YcmForceCompileAndDiagnostics<CR>
+map <Leader>f :YcmCompleter FixIt<CR>
+map <Leader>t :YcmCompleter GetType<CR>
+map <Leader>df :YcmCompleter GoToDefinition<CR>
+map <Leader>dc :YcmCompleter GoToDeclaration<CR>
+
+
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
 map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
