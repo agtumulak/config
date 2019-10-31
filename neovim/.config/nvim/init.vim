@@ -6,7 +6,7 @@ Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'ericcurtin/CurtineIncSw.vim'
+Plug 'derekwyatt/vim-fswitch'
 call plug#end()
 
 " YouCompleteMe
@@ -21,9 +21,10 @@ let g:ycm_autoclose_preview_window_after_completion='1'
 map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 
-
-" CurtineINcSw
-map <C-h> :call CurtineIncSw()<CR>
+" fswitch: vi.stackexchange.com/a/6517
+au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'    | let b:fswitchlocs = 'reg:/src/include/,../include,./'
+au! BufEnter *.h,*.hpp      let b:fswitchdst = 'cpp,cc,c' | let b:fswitchlocs = 'reg:/include/src/,../src,./'
+map <C-h> : FSHere<CR>
 
 " fzf
 map <Leader><space> :Files<CR>
