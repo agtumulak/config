@@ -10,11 +10,11 @@ Plug 'derekwyatt/vim-fswitch'
 call plug#end()
 
 " YouCompleteMe
-map <Leader>r :YcmForceCompileAndDiagnostics<CR>
-map <Leader>f :YcmCompleter FixIt<CR>
-map <Leader>t :YcmCompleter GetType<CR>
-map <Leader>df :YcmCompleter GoToDefinition<CR>
-map <Leader>dc :YcmCompleter GoToDeclaration<CR>
+nmap <Leader>r :YcmForceCompileAndDiagnostics<CR>
+nmap <Leader>f :YcmCompleter FixIt<CR>
+nmap <Leader>t :YcmCompleter GetType<CR>
+nmap <Leader>df :YcmCompleter GoToDefinition<CR>
+nmap <Leader>dc :YcmCompleter GoToDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion='1'
 
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
@@ -24,10 +24,10 @@ imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 " fswitch: vi.stackexchange.com/a/6517
 au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'    | let b:fswitchlocs = 'reg:/src/include/,../include,./'
 au! BufEnter *.h,*.hpp      let b:fswitchdst = 'cpp,cc,c' | let b:fswitchlocs = 'reg:/include/src/,../src,./'
-map <C-h> : FSHere<CR>
+nmap <C-h> : FSHere<CR>
 
 " fzf
-map <Leader><space> :Files<CR>
+nmap <Leader><space> :Files<CR>
 
 " vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
 let g:vimtex_view_method='skim' " PDF-Tex Sync: nvr --remote-silent %file -c %line
@@ -65,7 +65,8 @@ set wildmode=longest:full,full
 set clipboard=unnamedplus
 
 " keymappings
-map <Space> <Leader>
+nmap <Space> <Leader>
 
 " stackoverflow.com/a/657484/5101335
-map <Leader>/ :noh<CR>
+nmap <Leader>/ :noh<CR>
+
