@@ -7,6 +7,7 @@ Plug 'morhetz/gruvbox'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'derekwyatt/vim-fswitch'
+Plug 'nvie/vim-flake8'
 call plug#end()
 
 " YouCompleteMe
@@ -20,6 +21,9 @@ let g:ycm_autoclose_preview_window_after_completion='1'
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
 map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+
+" vim-flake8
+autocmd FileType python map <buffer> <C-K> :call flake8#Flake8()<CR>
 
 " fswitch: vi.stackexchange.com/a/6517
 au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'    | let b:fswitchlocs = 'reg:/src/include/,../include,./'
