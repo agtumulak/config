@@ -18,9 +18,10 @@ nmap <Leader>df :YcmCompleter GoToDefinition<CR>
 nmap <Leader>dc :YcmCompleter GoToDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion='1'
 
-" clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
-map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
+" xml editing: https://vim.fandom.com/wiki/Vim_as_XML_Editor
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+set foldlevelstart=999
 
 " vim-flake8
 autocmd FileType python map <buffer> <C-K> :call flake8#Flake8()<CR>
@@ -73,4 +74,8 @@ nmap <Space> <Leader>
 
 " stackoverflow.com/a/657484/5101335
 nmap <Leader>/ :noh<CR>
+
+" clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
+autocmd FileType cpp map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
+autocmd FileType cpp imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
 
