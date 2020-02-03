@@ -58,6 +58,8 @@ set number
 set mouse=a
 set colorcolumn=80
 set updatetime=250
+set matchpairs+=<:>
+set showmatch
 
 " stackoverflow.com/a/4617156/5101335
 highlight ExtraWhitespace ctermbg=red guibg=red
