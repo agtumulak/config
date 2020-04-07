@@ -45,6 +45,7 @@ let g:python_host_prog  = '/usr/local/miniconda3/envs/neovim-py2/bin/python'
 let g:python3_host_prog = '/usr/local/miniconda3/envs/neovim-py3/bin/python'
 
 " github.com/morhetz/gruvbox
+let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 set background=dark
 
