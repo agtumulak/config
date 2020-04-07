@@ -8,6 +8,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " YouCompleteMe
