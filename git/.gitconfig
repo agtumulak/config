@@ -18,3 +18,8 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
