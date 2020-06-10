@@ -1,6 +1,6 @@
 " vim plug
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Valloric/YouCompleteMe', {'do': '/usr/local/bin/python3 ./install.py --clangd-completer'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
@@ -12,18 +12,22 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
-" YouCompleteMe
-nmap <Leader>r :YcmForceCompileAndDiagnostics<CR>
-nmap <Leader>f :YcmCompleter FixIt<CR>
-nmap <Leader>t :YcmCompleter GetType<CR>
-nmap <Leader>df :YcmCompleter GoToDefinition<CR>
-nmap <Leader>dc :YcmCompleter GoToDeclaration<CR>
-let g:ycm_autoclose_preview_window_after_completion='1'
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-" xml editing: https://vim.fandom.com/wiki/Vim_as_XML_Editor
-let g:xml_syntax_folding=1
-au FileType xml setlocal foldmethod=syntax
-set foldlevelstart=999
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> <Leader>df <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
 " vim-flake8
 autocmd FileType python map <buffer> <C-K> :call flake8#Flake8()<CR>
