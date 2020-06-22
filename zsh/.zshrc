@@ -24,6 +24,12 @@ source /usr/local/miniconda3/etc/profile.d/conda.sh
 alias ls='ls -FGh'
 alias ll='ls -al'
 alias vim='nvim'
+alias rb='rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j12 && cd ..'
+alias cf='/usr/local/miniconda3/envs/canvas-fetch/bin/python ~/Developer/canvas-fetch/canvas-fetch.py'
+
+# grrr.tech/posts/2020/switch-dark-mode-os/
+alias lightmode='tmux set-option status-fg white && tmux setenv -g TMUX_THEME light'
+alias darkmode='tmux set-option status-fg black && tmux setenv -g TMUX_THEME dark'
 
 
 # compsys: zsh.sourceforge.net/Guide/zshguide06.html
@@ -41,6 +47,10 @@ zstyle ':completion:*' auto-description 'specify: %d'
 fpath+="${DEV_PATH}/conda-zsh-completion"
 autoload -Uz compinit
 compinit
+
+
+BASE16_SHELL="${DEV_PATH}/base16-shell/"
+[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
 # pure prompt: github.com/sindresorhus/pure/wiki

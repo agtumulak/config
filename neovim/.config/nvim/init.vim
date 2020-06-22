@@ -4,7 +4,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'derekwyatt/vim-fswitch'
@@ -51,10 +51,13 @@ let g:vimtex_compiler_progname='/usr/local/miniconda3/envs/neovim-py3/bin/nvr'
 let g:python_host_prog  = '/usr/local/miniconda3/envs/neovim-py2/bin/python'
 let g:python3_host_prog = '/usr/local/miniconda3/envs/neovim-py3/bin/python'
 
-" github.com/morhetz/gruvbox
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
-set background=dark
+" github.com/chriskempson/base16-vim
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+exe 'highlight LspCxxHlGroupMemberVariable guifg=#' . g:base16_gui05
+
 
 " tabs: vim.wikia.com/wiki/Indenting_source_code
 set expandtab
@@ -68,6 +71,7 @@ set colorcolumn=80
 set updatetime=250
 set matchpairs+=<:>
 set showmatch
+set termguicolors " jdhao.github.io/2018/10/19/tmux_nvim_true_color/
 
 " stackoverflow.com/a/4617156/5101335
 highlight ExtraWhitespace ctermbg=red guibg=red
