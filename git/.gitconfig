@@ -19,7 +19,7 @@
 	new = green bold
 	whitespace = red reverse
 [alias]
-	co = checkout
+	ch = checkout
 	br = branch
-	ci = commit
+	co = commit
 	st = status
