@@ -20,8 +20,6 @@ bindkey '^R' history-incremental-search-backward # stackoverflow.com/q/3127392
 alias ls='ls -FGh'
 alias ll='ls -al'
 alias vim='nvim'
-alias rb='rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j12 && cd ..'
-alias cf='/usr/local/miniconda3/envs/canvas-fetch/bin/python ~/Developer/canvas-fetch/canvas-fetch.py'
 
 # grrr.tech/posts/2020/switch-dark-mode-os/
 alias lightmode='tmux set-option status-fg white && tmux setenv -g TMUX_THEME light'
