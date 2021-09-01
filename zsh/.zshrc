@@ -16,10 +16,6 @@ bindkey '^?' backward-delete-char # superuser.com/a/533685
 bindkey '^R' history-incremental-search-backward # stackoverflow.com/q/3127392
 
 
-# anaconda
-source /usr/local/miniconda3/etc/profile.d/conda.sh
-
-
 # aliases
 alias ls='ls -FGh'
 alias ll='ls -al'
