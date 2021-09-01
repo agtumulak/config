@@ -38,16 +38,19 @@ zstyle ':completion:*' list-prompt '%S%l: hit TAB for more, or the character to 
 zstyle ':completion:*' select-prompt '%Sscrolling: %l%s'
 zstyle ':completion:*' auto-description 'specify: %d'
 
+
+# docs.conda.io/projects/conda/en/latest/user-guide/configuration/enable-tab-completion.html
 fpath+="${DEV_PATH}/conda-zsh-completion"
 autoload -Uz compinit
 compinit
 
 
+# github.com/chriskempson/base16-shell
 BASE16_SHELL="${DEV_PATH}/base16-shell/"
 [ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
-# pure prompt: github.com/sindresorhus/pure/wiki
+# github.com/sindresorhus/pure/wiki
 fpath+="${DEV_PATH}/pure"
 autoload -U promptinit
 promptinit
