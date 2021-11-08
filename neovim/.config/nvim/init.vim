@@ -5,7 +5,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'chriskempson/base16-vim'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'nvie/vim-flake8'
