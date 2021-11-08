@@ -68,8 +68,8 @@ let g:vimtex_compiler_progname='/usr/local/miniconda3/envs/neovim-py3/bin/nvr'
 " backward search: Command-Shift-Click
 
 " neovim.io/doc/user/provider.html#python-virtualenv
-let g:python_host_prog  = '/usr/local/miniconda3/envs/neovim-py2/bin/python'
-let g:python3_host_prog = '/usr/local/miniconda3/envs/neovim-py3/bin/python'
+let g:python_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim-py2/bin/python'
+let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim-py3/bin/python'
 
 " github.com/chriskempson/base16-vim
 if filereadable(expand("~/.vimrc_background"))
@@ -110,6 +110,5 @@ nmap <Space> <Leader>
 nmap <Leader>/ :noh<CR>
 
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
-autocmd FileType cpp map <C-K> :pyf /usr/local/share/clang/clang-format.py<cr>
-autocmd FileType cpp imap <C-K> <c-o>:pyf /usr/local/share/clang/clang-format.py<cr>
-
+autocmd FileType cpp map <C-K> :pyf /opt/homebrew/Cellar/clang-format/13.0.0/share/clang/clang-format.py<cr>
+autocmd FileType cpp imap <C-K> <c-o>:pyf /opt/homebrew/Cellar/clang-format/13.0.0/share/clang/clang-format.py<cr>
