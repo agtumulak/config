@@ -61,11 +61,15 @@ nmap <C-h> : FSHere<CR>
 " fzf
 nmap <Leader><space> :Files<CR>
 
-" vimtex: github.com/lervag/vimtex/wiki/introduction#neovim
-let g:vimtex_view_method='skim' " PDF-Tex Sync: nvr --remote-silent %file -c %line
-let g:vimtex_compiler_progname='/usr/local/miniconda3/envs/neovim-py3/bin/nvr'
+" vimtex
 " forward search: <Leader>-l-v
 " backward search: Command-Shift-Click
+let g:vimtex_view_method='skim'
+" jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/
+augroup vimtex_common
+  autocmd!
+  autocmd FileType tex call writefile([v:servername], "/tmp/vimtexserver.txt")
+augroup END
 
 " neovim.io/doc/user/provider.html#python-virtualenv
 let g:python_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim-py2/bin/python'
