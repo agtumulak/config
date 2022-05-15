@@ -9,7 +9,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'nvie/vim-flake8'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
