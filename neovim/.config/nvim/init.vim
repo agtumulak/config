@@ -8,6 +8,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'tpope/vim-fugitive'
+Plug 'psf/black', { 'branch': 'stable' }
 call plug#end()
 
 
@@ -103,3 +104,7 @@ nmap <Leader>/ :noh<CR>
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
 autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/14.0.2/share/clang/clang-format.py<cr>
 autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/14.0.2/share/clang/clang-format.py<cr>
+
+" black auto formatting
+let g:black_linelength=80
+nnoremap <C-K> :Black<CR>
