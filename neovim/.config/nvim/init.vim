@@ -48,15 +48,11 @@ function! s:show_documentation()
   endif
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
+" Switch between source and header files
+nmap <C-h> :CocCommand clangd.switchSourceHeader<CR>
 
 " vim-flake8
 autocmd FileType python map <buffer> <C-K> :call flake8#Flake8()<CR>
-
-" fswitch: vi.stackexchange.com/a/6517
-au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'    | let b:fswitchlocs = 'reg:/src/include/,../include,./'
-au! BufEnter *.h,*.hpp      let b:fswitchdst = 'cpp,cc,c' | let b:fswitchlocs = 'reg:/include/src/,../src,./'
-nmap <C-h> : FSHere<CR>
 
 " fzf
 nmap <Leader><space> :Files<CR>
