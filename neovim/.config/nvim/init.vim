@@ -50,9 +50,6 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Switch between source and header files
 nmap <C-h> :CocCommand clangd.switchSourceHeader<CR>
 
-" vim-flake8
-autocmd FileType python map <buffer> <C-K> :call flake8#Flake8()<CR>
-
 " fzf
 nmap <Leader><space> :Files<CR>
 
