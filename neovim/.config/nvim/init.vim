@@ -68,8 +68,7 @@ augroup vimtex_common
 augroup END
 
 " neovim.io/doc/user/provider.html#python-virtualenv
-let g:python_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim-py2/bin/python'
-let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim-py3/bin/python'
+let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python'
 
 " github.com/chriskempson/base16-vim
 if filereadable(expand("~/.vimrc_background"))
