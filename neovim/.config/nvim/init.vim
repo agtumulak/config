@@ -6,7 +6,6 @@ Plug 'lervag/vimtex'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'derekwyatt/vim-fswitch'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'tpope/vim-fugitive'
 call plug#end()
@@ -16,8 +15,6 @@ call plug#end()
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-" Always show the signcolumn
-set signcolumn=number
 " Use tab for trigger completion with characters ahead and navigate.
 function! s:check_back_space() abort
   let col = col('.') - 1
