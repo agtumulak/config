@@ -1,0 +1,9 @@
+{
+  "semanticTokens.filetypes": ["*"],
+  "python.pythonPath": "/Users/atumulak/Developer/python.sh",
+  "python.linting.flake8Enabled": true,
+  "xml.java.home": "/opt/homebrew/opt/openjdk/",
+  "xml.fileAssociations":[{
+    "systemId": "http://www.w3.org/2001/XMLSchema.xsd",
+    "pattern": "**/*.xsd"}]
+}
