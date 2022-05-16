@@ -108,3 +108,6 @@ autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/14.
 " black auto formatting
 let g:black_linelength=80
 nnoremap <C-K> :Black<CR>
+
+" vi.stackexchange.com/a/21766
+let g:pyindent_open_paren = 'shiftwidth()'
