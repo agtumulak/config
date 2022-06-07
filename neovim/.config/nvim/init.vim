@@ -51,14 +51,11 @@ nmap <C-h> :CocCommand clangd.switchSourceHeader<CR>
 nmap <Leader><space> :Files<CR>
 
 " vimtex
+" dr563105.github.io/blog/skim-vimtex-setup/
+" Skim must be started by VimTeX for backward sync to work!
 " forward search: <Leader>-l-v
 " backward search: Command-Shift-Click
 let g:vimtex_view_method='skim'
-" jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/
-augroup vimtex_common
-  autocmd!
-  autocmd FileType tex call writefile([v:servername], "/tmp/vimtexserver.txt")
-augroup END
 
 " neovim.io/doc/user/provider.html#python-virtualenv
 let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python'
