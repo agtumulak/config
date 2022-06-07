@@ -9,6 +9,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'tpope/vim-fugitive'
 Plug 'psf/black', { 'branch': 'stable' }
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
@@ -108,3 +109,7 @@ nnoremap <C-K> :Black<CR>
 
 " vi.stackexchange.com/a/21766
 let g:pyindent_open_paren = 'shiftwidth()'
+
+" github.com/yggdroot/indentline#customization
+let g:indentLine_setColors = g:base16_gui00
+let g:indentLine_char_list = ['│', '|', '¦', '┆', '┊']
