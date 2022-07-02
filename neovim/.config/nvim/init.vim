@@ -57,6 +57,8 @@ nmap <Leader><space> :Files<CR>
 " forward search: <Leader>-l-v
 " backward search: Command-Shift-Click
 let g:vimtex_view_method='skim'
+" vi.stackexchange.com/q/31138/23164
+let g:vimtex_syntax_conceal_disable=1
 
 " neovim.io/doc/user/provider.html#python-virtualenv
 let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python'
