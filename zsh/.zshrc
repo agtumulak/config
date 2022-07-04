@@ -41,6 +41,8 @@ zstyle ':completion:*' auto-description 'specify: %d'
 
 # docs.conda.io/projects/conda/en/latest/user-guide/configuration/enable-tab-completion.html
 fpath+="${DEV_PATH}/conda-zsh-completion"
+# docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+fpath+="$(brew --prefix)/share/zsh/site-functions"
 autoload -Uz compinit
 compinit
 
