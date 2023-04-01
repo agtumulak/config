@@ -64,7 +64,7 @@ let g:vimtex_view_method='skim'
 let g:vimtex_syntax_conceal_disable=1
 
 " neovim.io/doc/user/provider.html#python-virtualenv
-let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python'
+let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/bin/python'
 
 " github.com/chriskempson/base16-vim
 if filereadable(expand("~/.vimrc_background"))
