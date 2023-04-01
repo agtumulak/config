@@ -71,7 +71,6 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-exe 'highlight LspCxxHlGroupMemberVariable guifg=#' . g:base16_gui05
 
 
 " tabs: vim.wikia.com/wiki/Indenting_source_code
