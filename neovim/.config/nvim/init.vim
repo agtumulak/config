@@ -50,7 +50,9 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <C-h> :CocCommand clangd.switchSourceHeader<CR>
 
 " fzf
-nmap <Leader><space> :Files<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>b :Buffers<CR>
+let g:fzf_preview_window = ['up:50%']
 
 " vimtex
 " dr563105.github.io/blog/skim-vimtex-setup/
