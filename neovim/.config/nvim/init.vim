@@ -103,13 +103,18 @@ nmap <Space> <Leader>
 " stackoverflow.com/a/657484/5101335
 nmap <Leader>/ :noh<CR>
 
+" stackoverflow.com/a/15449678/5101335
+nnoremap <leader>r :!%:p<CR>
+
+
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
 autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
 autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
 
 " black auto formatting
 let g:black_linelength=80
-nnoremap <C-K> :Black<CR>
+let g:black_target_version = 'py310'
+autocmd FileType python nnoremap <C-K> :Black<CR>
 
 " vi.stackexchange.com/a/21766
 let g:pyindent_open_paren = 'shiftwidth()'
