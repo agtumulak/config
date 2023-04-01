@@ -104,8 +104,8 @@ nmap <Space> <Leader>
 nmap <Leader>/ :noh<CR>
 
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
-autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/14.0.6/share/clang/clang-format.py<cr>
-autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/14.0.6/share/clang/clang-format.py<cr>
+autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
+autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
 
 " black auto formatting
 let g:black_linelength=80
