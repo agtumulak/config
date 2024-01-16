@@ -1,66 +1,50 @@
-# environment variables
-export DEV_PATH="/Users/atumulak/Developer"
-export SHELL="/bin/zsh" # used by .tmux.conf
-export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+# https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+## zsh
 
-# zsh
-setopt appendhistory beep extendedglob nomatch
+# https://unix.stackexchange.com/a/389883
 HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
+HISTSIZE=100000
+SAVEHIST=100000
+setopt appendhistory
 
-bindkey -v # vim keybindings
-bindkey '^_' undo # can undo expansions
-bindkey '^?' backward-delete-char # superuser.com/a/533685
-bindkey '^R' history-incremental-search-backward # stackoverflow.com/q/3127392
+# antidote
+source /home/atumulak/.antidote/antidote.zsh
+antidote load # loads .zsh_plugins.txt
 
+# tab completion style
+zstyle ':completion:*' menu select
+zstyle ':completion:*' file-list all
+# https://unix.stackexchange.com/a/323282
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
-# aliases
-alias ls='ls -FGh'
-alias ll='ls -al'
+# https://github.com/mattmc3/antidote/discussions/74
+autoload -Uz compinit && compinit -u
+
+# https://github.com/chriskempson/base16-shell#if-youre-using-zsh--plug
+[[ -z BASE16_THEME ]] && base16_gruvbox-dark-hard
+
+## environment variables
+
+export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-plugin
+export VISUAL='nvim' # ranger-fm
+export SHELL="/home/atumulak/.local/bin/zsh" # ranger uses this
+
+## aliases
+
+alias diff='diff --side-by-side --color=auto'
+alias less='less -R' # https://spack.readthedocs.io/en/latest/basic_usage.html#basic-usage
+alias ls='ls --color=auto' # color
+alias ll='ls -al' # long
+alias tmux='tmux -u' # https://github.com/jeffreytse/zsh-vi-mode
 alias vim='nvim'
 
-# grrr.tech/posts/2020/switch-dark-mode-os/
-alias lightmode='tmux set-option status-fg white && tmux setenv -g TMUX_THEME light'
-alias darkmode='tmux set-option status-fg black && tmux setenv -g TMUX_THEME dark'
+## keybindings
 
-
-# compsys: zsh.sourceforge.net/Guide/zshguide06.html
-setopt COMPLETE_IN_WORD MAGIC_EQUAL_SUBST
-zstyle ':completion:*' add-space true
-zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate _prefix
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # github.com/robbyrussell/oh-my-zsh/issues/1563
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu 'select'
-zstyle ':completion:*' format 'completing: %d'
-zstyle ':completion:*' list-prompt '%S%l: hit TAB for more, or the character to insert%s'
-zstyle ':completion:*' select-prompt '%Sscrolling: %l%s'
-zstyle ':completion:*' auto-description 'specify: %d'
-
-
-# docs.conda.io/projects/conda/en/latest/user-guide/configuration/enable-tab-completion.html
-fpath+="${DEV_PATH}/conda-zsh-completion"
-# docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-fpath+="$(brew --prefix)/share/zsh/site-functions"
-autoload -Uz compinit
-compinit
-
-
-# github.com/chriskempson/base16-shell
-BASE16_SHELL="${DEV_PATH}/base16-shell/"
-[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
-
-
-# github.com/sindresorhus/pure/wiki
-fpath+="${DEV_PATH}/pure"
-autoload -U promptinit
-promptinit
-prompt pure
-zstyle ':prompt:pure:prompt:success' color 'green'
-
-
-# syntax highlighting: github.com/zsh-users/zsh-syntax-highlighting
-source "${DEV_PATH}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-
+bindkey -v # https://stackoverflow.com/a/58188295
+bindkey '^?' backward-delete-char # https://superuser.com/a/533685

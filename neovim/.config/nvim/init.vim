@@ -1,22 +1,54 @@
-" vim plug
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'airblade/vim-gitgutter'
-Plug 'lervag/vimtex'
-Plug 'chriskempson/base16-vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+call plug#begin()
+
+Plug 'RRethy/nvim-base16'
+Plug '/home/atumulak/.fzf' " https://github.com/junegunn/fzf/blob/master/README-VIM.md#fzf-vim-integration
 Plug 'junegunn/fzf.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'neoclide/coc.nvim', {'branch': 'v0.0.82'}
 Plug 'psf/black', { 'branch': 'stable' }
-Plug 'Yggdroot/indentLine'
+Plug 'PeterRincker/vim-searchlight'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 call plug#end()
+
+set number
+set clipboard+=unnamedplus " :help clipboard
+set scrolloff=999
+set wildmenu " https://stackoverflow.com/a/13043196
+set wildmode=longest:full,full " https://stackoverflow.com/a/13043196
+set updatetime=100 " https://github.com/airblade/vim-gitgutter#installation
+
+" keymappings
+nmap <Space> <Leader>
+
+" stackoverflow.com/a/657484/5101335
+nmap <Leader>/ :noh<CR>
+
+" https://github.com/francoiscabrol/ranger.vim#opening-ranger-instead-of-netrw-when-you-open-a-directory
+let g:ranger_replace_netrw = 1
+
+" fzf
+nmap <Leader>z :Files<CR>
+nmap <Leader>b :Buffers<CR>
+let g:fzf_preview_window = ['up:50%']
+
+" :h provider-python
+let g:python3_host_prog = '/home/atumulak/.conda/envs/neovim/bin/python'
+
+" https://github.com/chriskempson/base16-shell#base16-vim-users
+if exists('$BASE16_THEME')
+      \ && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+    let base16colorspace=256
+    colorscheme base16-$BASE16_THEME
+endif
 
 
 " coc: github.com/neoclide/coc.nvim#example-vim-configuration
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
 " Use tab for trigger completion with characters ahead and navigate.
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -47,78 +79,23 @@ function! s:show_documentation()
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Switch between source and header files
-nmap <C-h> :CocCommand clangd.switchSourceHeader<CR>
+nmap <C-s> :CocCommand clangd.switchSourceHeader<CR>
 
-" fzf
-nmap <Leader>f :Files<CR>
-nmap <Leader>b :Buffers<CR>
-let g:fzf_preview_window = ['up:50%']
+" add some more contrast to popup menu background
+highlight Pmenu ctermbg=White
+highlight FgCocErrorFloatBgCocFloating ctermbg=White
+highlight CocFloating ctermbg=White
 
-" vimtex
-" dr563105.github.io/blog/skim-vimtex-setup/
-" Skim must be started by VimTeX for backward sync to work!
-" forward search: <Leader>-l-v
-" backward search: Command-Shift-Click
-let g:vimtex_view_method='skim'
-" vi.stackexchange.com/q/31138/23164
-let g:vimtex_syntax_conceal_disable=1
+highlight! link CocFloating Pmenu
+highlight! link CocMenuSel PmenuSel
 
-" neovim.io/doc/user/provider.html#python-virtualenv
-let g:python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/bin/python'
+" vim-searchlight
+highlight link Searchlight IncSearch
 
-" github.com/chriskempson/base16-vim
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" black formatter
+autocmd FileType python nnoremap <Leader>k :Black<CR>
 
-
-" tabs: vim.wikia.com/wiki/Indenting_source_code
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-
-" misc
-set number
-set mouse=a
-set colorcolumn=80
-set updatetime=250
-set matchpairs+=<:>
-set showmatch
-set termguicolors " jdhao.github.io/2018/10/19/tmux_nvim_true_color/
-
-" stackoverflow.com/a/4617156/5101335
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-
-" stackoverflow.com/a/13216072/5101335
-set wildmode=longest:full,full
-
-" stackoverflow.com/a/30691754
-set clipboard=unnamedplus
-
-" keymappings
-nmap <Space> <Leader>
-
-" stackoverflow.com/a/657484/5101335
-nmap <Leader>/ :noh<CR>
-
-" stackoverflow.com/a/15449678/5101335
-nnoremap <leader>r :!%:p<CR>
-
-
-" clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
-autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
-autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
-
-" black auto formatting
-let g:black_linelength=80
-let g:black_target_version = 'py310'
-autocmd FileType python nnoremap <C-K> :Black<CR>
-
-" vi.stackexchange.com/a/21766
-let g:pyindent_open_paren = 'shiftwidth()'
-
-" github.com/yggdroot/indentline#customization
-let g:indentLine_setColors = g:base16_gui00
-let g:indentLine_char_list = ['│', '|', '¦', '┆', '┊']
+" github.com/lukas-reineke/indent-blankline.nvim
+lua << EOF
+require("ibl").setup({indent = {char = {'│', '|', '¦', '┆', '┊'}}})
+EOF
