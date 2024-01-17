@@ -106,10 +106,11 @@ nmap <Leader>/ :noh<CR>
 " stackoverflow.com/a/15449678/5101335
 nnoremap <leader>r :!%:p<CR>
 
-
+" stackoverflow.com/a/2284682
+let clangformat_path = globpath('/opt/homebrew/Cellar/clang-format','*/share/clang/clang-format.py')
 " clang-format: clang.llvm.org/docs/ClangFormat.html#vim-integration
-autocmd FileType cpp map <C-K> :py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
-autocmd FileType cpp imap <C-K> <c-o>:py3f /opt/homebrew/Cellar/clang-format/16.0.0/share/clang/clang-format.py<cr>
+execute 'autocmd FileType cpp map <C-K> :py3f '.clangformat_path.'<CR>'
+execute 'autocmd FileType cpp imap <C-K> <c-o>:py3f '.clangformat_path.'<CR>'
 
 " black auto formatting
 let g:black_linelength=80
