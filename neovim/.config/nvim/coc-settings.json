@@ -1,12 +1,6 @@
 {
-  "coc.preferences.enableMarkdown": false,
-  "semanticTokens.filetypes": ["*"],
-  "python.pythonPath": "/Users/atumulak/Developer/python.sh",
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": ["--ignore=E203,W503"],
-  "python.formatting.provider": "black",
-  "xml.java.home": "/opt/homebrew/opt/openjdk/",
-  "xml.fileAssociations":[{
-    "systemId": "http://www.w3.org/2001/XMLSchema.xsd",
-    "pattern": "**/*.xsd"}]
+  "clangd.arguments": [
+    "--query-driver=/opt/local/software/free/gcc/gcc-11.2.0/bin/g++"
+  ],
+  "semanticTokens.enable": true
 }
