@@ -1,6 +1,0 @@
-{
-  "clangd.arguments": [
-    "--query-driver=/opt/local/software/free/gcc/gcc-11.2.0/bin/g++"
-  ],
-  "semanticTokens.enable": true
-}
