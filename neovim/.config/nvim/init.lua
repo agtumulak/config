@@ -1,0 +1,329 @@
+-- TODO: Make loads lazier
+
+-- misc globals
+vim.g.mapleader = " "
+vim.keymap.set('n', "<leader>/", "<cmd>noh<cr>", {})
+vim.api.nvim_set_hl(0, "markdownUrl", { link = "Comment" })
+
+-- misc options
+vim.opt.number = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.clipboard = "unnamedplus"
+vim.opt.scrolloff = 999
+
+-- https://github.com/folke/lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({ "git", "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath, })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup {
+    -- https://github.com/RRethy/base16-nvim?tab=readme-ov-file#nvim-base16
+    {
+        "RRethy/base16-nvim",
+        config = function()
+            vim.opt.termguicolors = true
+            require('base16-colorscheme').with_config {
+                telescope = false,
+                cmp = false,
+            }
+            vim.cmd.colorscheme("base16-gruvbox-dark-hard")
+        end,
+    },
+    -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#install
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+    },
+    -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#mapping-cr
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true,
+    },
+    -- https://github.com/hrsh7th/nvim-cmp?tab=readme-ov-file#setup
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "L3MON4D3/LuaSnip",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            "windwp/nvim-autopairs" },
+        config = function()
+            local has_words_before = function()
+                unpack = unpack or table.unpack
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
+            local luasnip = require("luasnip")
+            local cmp = require("cmp")
+            cmp.setup {
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                    end,
+                },
+                window = {
+                    documentation = cmp.config.window.bordered(),
+                    completion = cmp.config.window.bordered(),
+                },
+                -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+                mapping = cmp.mapping.preset.insert {
+                    ["<C-p>"] = cmp.mapping.complete(),
+                    ["<Tab>"] = cmp.mapping(
+                        function(fallback)
+                            if cmp.visible() then
+                                cmp.select_next_item()
+                            elseif luasnip.expand_or_jumpable() then
+                                luasnip.expand_or_jump()
+                            elseif has_words_before() then
+                                cmp.complete()
+                            else
+                                fallback()
+                            end
+                        end,
+                        { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(
+                        function(fallback)
+                            if cmp.visible() then
+                                cmp.select_prev_item()
+                            elseif luasnip.jumpable(-1) then
+                                luasnip.jump(-1)
+                            else
+                                fallback()
+                            end
+                        end,
+                        { "i", "s" }),
+                    ["<CR>"] = cmp.mapping({
+                        i = function(fallback)
+                            if cmp.visible() and cmp.get_active_entry() then
+                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                            else
+                                fallback()
+                            end
+                        end,
+                        s = cmp.mapping.confirm({ select = true }),
+                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                    }),
+                },
+                sources = cmp.config.sources {
+                    { name = "nvim_lsp", },
+                    { name = "nvim_lsp_signature_help", },
+                    { name = "path", },
+                    { name = "buffer", },
+                },
+            }
+            -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
+            cmp.event:on(
+                'confirm_done',
+                require("nvim-autopairs.completion.cmp").on_confirm_done()
+            )
+        end,
+    },
+    -- https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#suggested-configuration
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = { "hrsh7th/cmp-nvim-lsp", "nvim-telescope/telescope.nvim" },
+        config = function()
+            local lspconfig = require("lspconfig")
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                callback = function(ev)
+                    local opts = { buffer = ev.buf }
+                    vim.keymap.set('n', 'gd',
+                        function() require('telescope.builtin').lsp_definitions { show_line = false } end, opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+                    vim.keymap.set('n', 'gr',
+                        function() require('telescope.builtin').lsp_references { show_line = false, } end, opts)
+                    vim.keymap.set('n', '<leader>m', function() vim.lsp.buf.format { async = true } end, opts)
+                    vim.keymap.set('n', '<leader>s',
+                        function() require('telescope.builtin').lsp_document_symbols { symbol_width = 40 } end, opts)
+                    vim.keymap.set('n', '<C-s>', "<cmd>ClangdSwitchSourceHeader<cr>", opts)
+                end,
+            })
+            -- show line numbers in preview
+            vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
+            -- https://www.reddit.com/r/neovim/comments/wscfar/comment/ikxnw81/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+                vim.lsp.handlers.hover,
+                { border = 'rounded' }
+            )
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+            lspconfig.lua_ls.setup {
+                on_init = function(client)
+                    local path = client.workspace_folders[1].name
+                    if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+                        return
+                    end
+                    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                        runtime = { version = "LuaJIT" },
+                        -- make the server aware of Neovim runtime files
+                        workspace = {
+                            checkThirdParty = false,
+                            library = { vim.env.VIMRUNTIME },
+                        },
+                    })
+                end,
+                settings = { Lua = {} },
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            }
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
+            lspconfig.clangd.setup {
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                },
+            }
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+            -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
+            lspconfig.pyright.setup {}
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cmake
+            lspconfig.cmake.setup {}
+        end,
+    },
+    -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        main = "nvim-treesitter.configs",
+        opts = {
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+            modules = {}, ignore_install = {},
+            sync_install = false, auto_install = true,
+            highlight = { enable = true },
+        },
+    },
+    -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#installation
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+            },
+        },
+        keys = {
+            { "<leader>fd", "<cmd>Telescope find_files<cr>", desc = "Search with `fd`" },
+            { "<leader>rg", "<cmd>Telescope live_grep<cr>",  desc = "Search with `rg`" },
+            { "<leader>b",  "<cmd>Telescope buffers<cr>",    desc = "Search buffers" },
+            { "<leader>h",  "<cmd>Telescope help_tags<cr>",  desc = "Search help tags" },
+        },
+        opts = {
+            defaults = {
+                layout_strategy = "vertical",
+            },
+            extensions = {
+                file_browser = {
+                    mappings = {
+                        n = {
+                            ["h"] = function(prompt_bufnr, bypass)
+                                require("telescope").extensions.file_browser.actions
+                                    .goto_parent_dir(prompt_bufnr, bypass)
+                            end,
+                            ["l"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) end,
+                        },
+                    },
+                },
+            },
+        },
+        config = function(_, opts)
+            local telescope = require("telescope")
+            telescope.setup(opts)
+            telescope.load_extension("fzf")
+            telescope.load_extension("file_browser")
+        end,
+    },
+    -- https://github.com/nvim-telescope/telescope-file-browser.nvim?tab=readme-ov-file#installation
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<leader>fb", ":Telescope file_browser<CR>",                               desc = "File browser from cwd" },
+            { "<leader>fc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File browser from current file" },
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+            vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
+        end,
+    },
+    -- https://github.com/lewis6991/gitsigns.nvim?tab=readme-ov-file#keymaps
+    {
+        "lewis6991/gitsigns.nvim",
+        branch = "release",
+        opts = {
+            on_attach = function(bufnr)
+                local function map(mode, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    vim.keymap.set(mode, l, r, opts)
+                end
+                local gs = package.loaded.gitsigns
+                -- navigation
+                map('n', ']c', function()
+                    if vim.wo.diff then return ']c' end
+                    vim.schedule(function() gs.next_hunk() end)
+                    return '<Ignore>'
+                end, { expr = true })
+                map('n', '[c', function()
+                    if vim.wo.diff then return '[c' end
+                    vim.schedule(function() gs.prev_hunk() end)
+                    return '<Ignore>'
+                end, { expr = true })
+                -- keymaps
+                map("n", "<leader>hb", function() gs.blame_line { full = true } end)
+                map("n", "<leader>hs", gs.stage_hunk)
+                map("v", "<leader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+                map("n", "<leader>hu", gs.reset_hunk)
+                map("v", "<leader>hu", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+            end
+        }
+    },
+    -- https://github.com/lukas-reineke/indent-blankline.nvim
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            indent = { char = "▏" },
+            scope = { show_start = false, show_end = false },
+        }
+    },
+    -- https://github.com/christoomey/vim-tmux-navigator
+    {
+        "christoomey/vim-tmux-navigator",
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+            { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+            { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+            { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+        },
+    },
+    -- https://github.com/iamcco/markdown-preview.nvim?tab=readme-ov-file#installation--usage
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
+}
