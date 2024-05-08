@@ -1,3 +1,4 @@
 .netrwhist
 ssh/.ssh/*
 !ssh/.ssh/config
+neovim/.config/nvim/lazy-lock.json
