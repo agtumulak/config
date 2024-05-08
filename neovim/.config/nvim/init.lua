@@ -1,5 +1,6 @@
 -- misc globals
 vim.g.mapleader = " "
+vim.g.python3_host_prog = "/opt/homebrew/Caskroom/miniconda/base/envs/neovim/bin/python"
 vim.keymap.set("n", "<leader>/", "<cmd>noh<cr>", {})
 
 -- misc options
