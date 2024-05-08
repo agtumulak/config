@@ -33,8 +33,6 @@ autoload -Uz compinit && compinit -u
 ## environment variables
 
 export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-plugin
-export VISUAL='nvim' # ranger-fm
-export SHELL="/home/atumulak/.local/bin/zsh" # ranger uses this
 
 ## aliases
 
