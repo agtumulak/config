@@ -1,6 +1,6 @@
 [user]
 	name = Aaron G. Tumulak
-	email = agtumulak@gmail.com
+	email = atumulak@lanl.gov
 [core]
         editor = nvim
         pager = delta
