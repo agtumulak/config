@@ -42,6 +42,7 @@ alias ls='ls --color=auto' # color
 alias ll='ls -al' # long
 alias tmux='tmux -u' # https://github.com/jeffreytse/zsh-vi-mode
 alias vim='nvim'
+alias cat='bat --theme base16-256'
 
 ## keybindings
 
