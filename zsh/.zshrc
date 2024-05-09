@@ -1,5 +1,35 @@
+## system specific
+
+# https://ddw-confluence.lanl.gov/display/ADXComputing/Modules
+source /opt/local/packages/Modules/default/init/zsh
+# module use /opt/local/packages
+
+# load spack and base environment
+source /local/atumulak/spack/share/spack/setup-env.sh
+source /local/atumulak/spack/var/spack/environments/base/loads
+
 # enable fzf
 eval "$(fzf --zsh)"
+
+# https://ddw-confluence.lanl.gov/pages/viewpage.action?pageId=543752231
+source /home/xshares/PROJECTS/mcatk/modules/setup_mcatk_modules.sh
+# ADX modules were reorganized. This flattens the search paths.
+module use /opt/local/packages/Modules/default/modulefiles/compiler
+module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc
+module use /opt/local/packages/Modules/default/modulefiles/mpi
+module use /opt/local/packages/Modules/default/modulefiles/tools
+
+# # load spack-environment modules
+# source /home/atumulak/Developer/spack-environments/modules/setup_mcatk_modules.sh
+
+# https://ddw-confluence.lanl.gov/display/MCPUB/MCNP+Use+on+HPC+and+ADX+LAN
+module use /opt/local/codes/mcnp/modules
+
+# https://unix.stackexchange.com/a/414434
+export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+# start ssh-agent
+alias ssh-add-id='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ecdsa'
 
 ## zsh
 
