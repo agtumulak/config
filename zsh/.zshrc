@@ -11,7 +11,7 @@ setopt appendhistory
 setopt auto_pushd
 
 # antidote
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source /home/atumulak/.antidote/antidote.zsh
 antidote load # loads .zsh_plugins.txt
 
 # tab completion style
