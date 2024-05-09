@@ -347,4 +347,13 @@ require("lazy").setup {
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
     },
+    -- https://github.com/rbong/vim-flog?tab=readme-ov-file#installation
+    {
+        "rbong/vim-flog",
+        lazy = true,
+        cmd = { "Flog", "Flogsplit", "Floggit" },
+        dependencies = {
+            "tpope/vim-fugitive",
+        },
+    },
 }
