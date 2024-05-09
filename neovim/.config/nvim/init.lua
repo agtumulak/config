@@ -260,6 +260,27 @@ require("lazy").setup {
             vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
         end,
     },
+    -- https://github.com/axkirillov/easypick.nvim?tab=readme-ov-file#configuration
+    {
+        "axkirillov/easypick.nvim",
+        config = function()
+            local easypick = require("easypick")
+            local get_default_branch = "git rev-parse --symbolic-full-name refs/remotes/origin/HEAD | sed 's!.*/!!'"
+            local base_branch = vim.fn.system(get_default_branch) or "main"
+            easypick.setup({
+                pickers = {
+                    {
+                        name = "changed_files",
+                        command = "git diff --name-only",
+                        previewer = easypick.previewers.branch_diff({ base_branch = base_branch })
+                    },
+                }
+            })
+        end,
+        keys = {
+            { "<leader>cf", "<cmd>Easypick changed_files<cr>", desc = "List changed files not staged" },
+        },
+    },
     -- https://github.com/lewis6991/gitsigns.nvim?tab=readme-ov-file#keymaps
     {
         "lewis6991/gitsigns.nvim",
