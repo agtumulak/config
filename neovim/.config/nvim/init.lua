@@ -356,4 +356,9 @@ require("lazy").setup {
             "tpope/vim-fugitive",
         },
     },
+    -- https://github.com/lukoshkin/highlight-whitespace?tab=readme-ov-file#installation
+    {
+        "lukoshkin/highlight-whitespace",
+        config = true,
+    },
 }
