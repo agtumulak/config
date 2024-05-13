@@ -1,3 +1,6 @@
+# enable homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # enable fzf
 eval "$(fzf --zsh)"
 
@@ -11,7 +14,7 @@ setopt appendhistory
 setopt auto_pushd
 
 # antidote
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh
 antidote load # loads .zsh_plugins.txt
 
 # tab completion style

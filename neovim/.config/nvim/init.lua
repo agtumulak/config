@@ -1,6 +1,22 @@
 -- misc globals
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>/", "<cmd>noh<cr>", {})
+-- http://neovim.io/doc/user/provider.html#clipboard-wsl
+-- https://stackoverflow.com/a/68497318
+if os.getenv("DISPLAY") == nil then
+    vim.g.clipboard = {
+        name = "WslClipboard",
+        copy = {
+            ["+"] = "clip.exe",
+            ["*"] = "clip.exe",
+        },
+        paste = {
+            ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
+    }
+end
 
 -- misc options
 vim.opt.number = true
