@@ -1,5 +1,5 @@
-# https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# enable fzf
+eval "$(fzf --zsh)"
 
 ## zsh
 
