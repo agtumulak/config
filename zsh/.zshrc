@@ -4,6 +4,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # enable fzf
 eval "$(fzf --zsh)"
 
+# https://python-poetry.org/docs/#zsh
+fpath=(~/.zfunc $fpath)
+path=(/home/atumulak/.local/bin $path)
+
 ## zsh
 
 # https://unix.stackexchange.com/a/389883
