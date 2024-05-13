@@ -1,3 +1,6 @@
+# enable homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # enable fzf
 # https://github.com/junegunn/fzf/issues/3528
 export FZF_CTRL_R_OPTS='--bind "esc:become:echo {q}"'
@@ -13,7 +16,7 @@ setopt appendhistory
 setopt auto_pushd
 
 # antidote
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh
 antidote load # loads .zsh_plugins.txt
 
 # tab completion style
