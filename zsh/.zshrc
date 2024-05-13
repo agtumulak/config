@@ -62,3 +62,6 @@ bindkey '^?' backward-delete-char # https://superuser.com/a/533685
 path=(/usr/local/cuda/bin $path)
 typeset -T -gxU LD_LIBRARY_PATH ld_library_path
 ld_library_path=(/usr/local/cuda-12.2/lib64)
+
+# https://python-poetry.org/docs/#zsh
+fpath=(~/.zfunc $fpath)
