@@ -4,6 +4,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # enable fzf
 eval "$(fzf --zsh)"
 
+# https://python-poetry.org/docs/#zsh
+fpath=(~/.zfunc $fpath)
+path=(/home/atumulak/.local/bin $path)
+
 ## zsh
 
 # https://unix.stackexchange.com/a/389883
@@ -62,6 +66,3 @@ bindkey '^?' backward-delete-char # https://superuser.com/a/533685
 path=(/usr/local/cuda/bin $path)
 typeset -T -gxU LD_LIBRARY_PATH ld_library_path
 ld_library_path=(/usr/local/cuda-12.2/lib64)
-
-# https://python-poetry.org/docs/#zsh
-fpath=(~/.zfunc $fpath)
