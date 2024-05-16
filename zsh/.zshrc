@@ -66,6 +66,7 @@ autoload -Uz compinit && compinit -u
 ## environment variables
 
 export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-plugin
+unset MANPATH
 
 ## aliases
 
