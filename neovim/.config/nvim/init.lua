@@ -3,7 +3,6 @@
 -- misc globals
 vim.g.mapleader = " "
 vim.keymap.set('n', "<leader>/", "<cmd>noh<cr>", {})
-vim.api.nvim_set_hl(0, "markdownUrl", { link = "Comment" })
 
 -- misc options
 vim.opt.number = true
@@ -201,6 +200,10 @@ require("lazy").setup {
             sync_install = false, auto_install = true,
             highlight = { enable = true },
         },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+            vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
+        end,
     },
     -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#installation
     {
@@ -254,10 +257,6 @@ require("lazy").setup {
             { "<leader>fb", ":Telescope file_browser<CR>",                               desc = "File browser from cwd" },
             { "<leader>fc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File browser from current file" },
         },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-            vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
-        end,
     },
     -- https://github.com/axkirillov/easypick.nvim?tab=readme-ov-file#configuration
     {
