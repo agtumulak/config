@@ -54,6 +54,7 @@ require("lazy").setup {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "windwp/nvim-autopairs" },
         config = function()
@@ -121,6 +122,29 @@ require("lazy").setup {
                     { name = "buffer", },
                 },
             }
+            -- https://github.com/hrsh7th/cmp-cmdline?tab=readme-ov-file#setup
+            cmp.setup.cmdline("/", {
+                mapping = cmp.mapping.preset.cmdline {
+                    ["<CR>"] = cmp.mapping {
+                        c = cmp.mapping.confirm { select = false },
+                    }, },
+                sources = {
+                    { name = "buffer", }
+                }
+            })
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline {
+                    ["<CR>"] = cmp.mapping {
+                        c = cmp.mapping.confirm { select = false },
+                    }, },
+                sources = cmp.config.sources {
+                    {
+                        name = "path",
+                        option = { trailing_slash = true, },
+                    },
+                    { name = "cmdline", },
+                },
+            })
             -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
             cmp.event:on(
                 'confirm_done',
