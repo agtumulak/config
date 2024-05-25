@@ -155,7 +155,30 @@ require("lazy").setup({
     -- https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#suggested-configuration
     {
         "neovim/nvim-lspconfig",
-        dependencies = { "hrsh7th/cmp-nvim-lsp", "nvim-telescope/telescope.nvim" },
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "nvim-telescope/telescope.nvim",
+            -- this hierarchy is intended to load dependencies in the correct order
+            -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#setup
+            {
+                "williamboman/mason-lspconfig.nvim",
+                tag = "v1.29.0",
+                dependencies = {
+                    {
+                        "williamboman/mason.nvim",
+                        -- TODO: Repalce with a version tag once the following is merged:
+                        -- https://github.com/williamboman/mason.nvim/pull/1639
+                        commit = "0088ca599114e33bae3a4822dbfc5dc8ba357ab8",
+                        opts = { ui = { border = "rounded", }, },
+                    },
+                },
+                opts = { automatic_installation = true, },
+                config = function(_, opts)
+                    require("mason-lspconfig").setup(opts)
+                end,
+            },
+        },
+        -- https://github.com/LazyVim/LazyVim/blob/86ac9989ea15b7a69bb2bdf719a9a809db5ce526/lua/lazyvim/plugins/lsp/init.lua#L5
         event = LazyFile,
         config = function()
             local lspconfig = require("lspconfig")
@@ -213,6 +236,13 @@ require("lazy").setup({
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cmake
             lspconfig.cmake.setup {}
         end,
+    },
+    -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"
+        }
     },
     -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
     {
