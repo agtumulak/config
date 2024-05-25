@@ -1,5 +1,6 @@
 -- misc globals
 vim.g.mapleader = " "
+vim.g.python3_host_prog = "/usr/bin/python3"
 vim.keymap.set("n", "<leader>/", "<cmd>noh<cr>", {})
 -- http://neovim.io/doc/user/provider.html#clipboard-wsl
 -- https://stackoverflow.com/a/68497318
