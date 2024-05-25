@@ -35,28 +35,27 @@ require("lazy").setup {
             vim.cmd.colorscheme("base16-gruvbox-dark-hard")
         end,
     },
-    -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#install
-    {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-    },
-    -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#mapping-cr
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = true,
-    },
     -- https://github.com/hrsh7th/nvim-cmp?tab=readme-ov-file#setup
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            "L3MON4D3/LuaSnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-signature-help",
-            "windwp/nvim-autopairs" },
+            -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#install
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*",
+            },
+            -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#mapping-cr
+            {
+                "windwp/nvim-autopairs",
+                event = "InsertEnter",
+                config = true,
+            },
+        },
         config = function()
             local has_words_before = function()
                 unpack = unpack or table.unpack
