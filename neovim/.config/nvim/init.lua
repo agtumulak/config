@@ -1,5 +1,3 @@
--- TODO: Make loads lazier
-
 -- misc globals
 vim.g.mapleader = " "
 vim.keymap.set('n', "<leader>/", "<cmd>noh<cr>", {})
@@ -21,6 +19,9 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath, })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- https://github.com/LazyVim/LazyVim/discussions/1583
+local LazyFile = { "BufReadPost", "BufWritePost", "BufNewFile" }
 
 require("lazy").setup({
     -- https://github.com/RRethy/base16-nvim?tab=readme-ov-file#nvim-base16
@@ -155,6 +156,7 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         dependencies = { "hrsh7th/cmp-nvim-lsp", "nvim-telescope/telescope.nvim" },
+        event = LazyFile,
         config = function()
             local lspconfig = require("lspconfig")
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -216,6 +218,7 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        event = { LazyFile, "VeryLazy" },
         main = "nvim-treesitter.configs",
         opts = {
             ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
@@ -232,6 +235,7 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
+        event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
@@ -305,6 +309,7 @@ require("lazy").setup({
     -- https://github.com/lewis6991/gitsigns.nvim?tab=readme-ov-file#keymaps
     {
         "lewis6991/gitsigns.nvim",
+        event = LazyFile,
         branch = "release",
         opts = {
             on_attach = function(bufnr)
@@ -337,6 +342,7 @@ require("lazy").setup({
     -- https://github.com/lukas-reineke/indent-blankline.nvim
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = LazyFile,
         main = "ibl",
         opts = {
             indent = { char = "▏" },
