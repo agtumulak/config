@@ -377,6 +377,7 @@ require("lazy").setup({
     -- https://github.com/rbong/vim-flog?tab=readme-ov-file#installation
     {
         "rbong/vim-flog",
+        tag = "v2.0.0",
         lazy = true,
         cmd = { "Flog", "Flogsplit", "Floggit" },
         dependencies = {
