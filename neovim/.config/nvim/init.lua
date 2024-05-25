@@ -22,7 +22,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup {
+require("lazy").setup({
     -- https://github.com/RRethy/base16-nvim?tab=readme-ov-file#nvim-base16
     {
         "RRethy/base16-nvim",
@@ -382,4 +382,4 @@ require("lazy").setup {
         "lukoshkin/highlight-whitespace",
         config = true,
     },
-}
+}, { ui = { border = "rounded" } })
