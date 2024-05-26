@@ -193,7 +193,14 @@ require("lazy").setup({
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gr",
                         function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
-                    vim.keymap.set("n", "<leader>m", function() vim.lsp.buf.format { async = true } end, opts)
+                    vim.keymap.set("n", "<leader>m",
+                        function()
+                            if vim.bo.filetype == "python" then
+                                vim.cmd "!black %"
+                            else
+                                vim.lsp.buf.format { async = true }
+                            end
+                        end, opts)
                     vim.keymap.set("n", "<leader>s",
                         function() require("telescope.builtin").lsp_document_symbols { symbol_width = 40 } end, opts)
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
