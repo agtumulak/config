@@ -1,6 +1,6 @@
 -- misc globals
 vim.g.mapleader = " "
-vim.keymap.set('n', "<leader>/", "<cmd>noh<cr>", {})
+vim.keymap.set("n", "<leader>/", "<cmd>noh<cr>", {})
 
 -- misc options
 vim.opt.number = true
@@ -29,7 +29,7 @@ require("lazy").setup({
         "RRethy/base16-nvim",
         config = function()
             vim.opt.termguicolors = true
-            require('base16-colorscheme').with_config {
+            require("base16-colorscheme").with_config {
                 telescope = false,
                 cmp = false,
             }
@@ -147,7 +147,7 @@ require("lazy").setup({
             })
             -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#you-need-to-add-mapping-cr-on-nvim-cmp-setupcheck-readmemd-on-nvim-cmp-repo
             cmp.event:on(
-                'confirm_done',
+                "confirm_done",
                 require("nvim-autopairs.completion.cmp").on_confirm_done()
             )
         end,
@@ -183,26 +183,26 @@ require("lazy").setup({
         config = function()
             local lspconfig = require("lspconfig")
             vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
                     local opts = { buffer = ev.buf }
-                    vim.keymap.set('n', 'gd',
-                        function() require('telescope.builtin').lsp_definitions { show_line = false } end, opts)
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-                    vim.keymap.set('n', 'gr',
-                        function() require('telescope.builtin').lsp_references { show_line = false, } end, opts)
-                    vim.keymap.set('n', '<leader>m', function() vim.lsp.buf.format { async = true } end, opts)
-                    vim.keymap.set('n', '<leader>s',
-                        function() require('telescope.builtin').lsp_document_symbols { symbol_width = 40 } end, opts)
-                    vim.keymap.set('n', '<C-s>', "<cmd>ClangdSwitchSourceHeader<cr>", opts)
+                    vim.keymap.set("n", "gd",
+                        function() require("telescope.builtin").lsp_definitions { show_line = false } end, opts)
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+                    vim.keymap.set("n", "gr",
+                        function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
+                    vim.keymap.set("n", "<leader>m", function() vim.lsp.buf.format { async = true } end, opts)
+                    vim.keymap.set("n", "<leader>s",
+                        function() require("telescope.builtin").lsp_document_symbols { symbol_width = 40 } end, opts)
+                    vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
             -- https://www.reddit.com/r/neovim/comments/wscfar/comment/ikxnw81/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
                 vim.lsp.handlers.hover,
-                { border = 'rounded' }
+                { border = "rounded" }
             )
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
             lspconfig.lua_ls.setup {
@@ -252,8 +252,10 @@ require("lazy").setup({
         main = "nvim-treesitter.configs",
         opts = {
             ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-            modules = {}, ignore_install = {},
-            sync_install = false, auto_install = true,
+            modules = {},
+            ignore_install = {},
+            sync_install = false,
+            auto_install = true,
             highlight = { enable = true },
         },
         config = function(_, opts)
@@ -271,7 +273,8 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+                build =
+                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
             },
         },
         keys = {
@@ -350,15 +353,15 @@ require("lazy").setup({
                 end
                 local gs = package.loaded.gitsigns
                 -- navigation
-                map('n', ']c', function()
-                    if vim.wo.diff then return ']c' end
+                map("n", "]c", function()
+                    if vim.wo.diff then return "]c" end
                     vim.schedule(function() gs.next_hunk() end)
-                    return '<Ignore>'
+                    return "<Ignore>"
                 end, { expr = true })
-                map('n', '[c', function()
-                    if vim.wo.diff then return '[c' end
+                map("n", "[c", function()
+                    if vim.wo.diff then return "[c" end
                     vim.schedule(function() gs.prev_hunk() end)
-                    return '<Ignore>'
+                    return "<Ignore>"
                 end, { expr = true })
                 -- keymaps
                 map("n", "<leader>hb", function() gs.blame_line { full = true } end)
