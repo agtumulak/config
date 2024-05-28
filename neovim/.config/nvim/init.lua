@@ -189,7 +189,7 @@ require("lazy").setup({
                         opts = { ui = { border = "rounded", }, },
                     },
                 },
-                opts = { automatic_installation = true, },
+                opts = { automatic_installation = false, },
                 config = function(_, opts)
                     require("mason-lspconfig").setup(opts)
                 end,
