@@ -19,6 +19,12 @@ module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc
 module use /opt/local/packages/Modules/default/modulefiles/mpi
 module use /opt/local/packages/Modules/default/modulefiles/tools
 
+# node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm use v16.20.2
+
 # # load spack-environment modules
 # source /home/atumulak/Developer/spack-environments/modules/setup_mcatk_modules.sh
 
