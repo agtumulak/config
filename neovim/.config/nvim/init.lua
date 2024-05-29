@@ -211,6 +211,8 @@ require("lazy").setup({
                 vim.lsp.handlers.hover,
                 { border = "rounded" }
             )
+            -- https://github.com/neovim/nvim-lspconfig/issues/3158
+            require("lspconfig.ui.windows").default_options.border = "rounded"
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
             lspconfig.lua_ls.setup {
                 on_init = function(client)
