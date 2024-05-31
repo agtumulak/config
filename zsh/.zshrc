@@ -2,7 +2,7 @@
 
 # https://ddw-confluence.lanl.gov/display/ADXComputing/Modules
 source /opt/local/packages/Modules/default/init/zsh
-# module use /opt/local/packages
+module use /opt/local/packages/Modules/5.1.1/modulefiles/debugger
 
 # load spack and base environment
 source /local/atumulak/spack/share/spack/setup-env.sh
