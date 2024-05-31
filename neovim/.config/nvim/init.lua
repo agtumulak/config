@@ -273,6 +273,8 @@ require("lazy").setup({
                         { buffer = bufnr, desc = "Autoformat with yamlfmt" })
                 end,
             }
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls
+            lspconfig.fortls.setup {}
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
