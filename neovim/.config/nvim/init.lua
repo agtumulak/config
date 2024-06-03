@@ -283,16 +283,41 @@ require("lazy").setup({
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
             vim.lsp.enable { "jsonls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-            vim.lsp.config("yamlls", {
-                on_attach = function(_, bufnr)
-                    vim.keymap.set("n", "<leader>m", function() vim.cmd "!yamlfmt %" end,
-                        { buffer = bufnr, desc = "Autoformat with yamlfmt" })
-                end,
-            })
             vim.lsp.enable { "yamlls" }
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab
+            vim.lsp.config("texlab", {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>lv", function() vim.cmd "TexlabForward" end,
+                        { buffer = bufnr, desc = "Forward search" })
+                end,
+                settings = {
+                    texlab = {
+                        forwardSearch = {
+                            executable = "sumatrapdf.sh",
+                            args = { "-reuse-instance", "-forward-search", "%f", "%l", "%p" },
+                        },
+                        build = {
+                            args = { "-pdf", "-interaction=nonstopmode", "-synctex=-1", "%f" },
+                            executable = "latexmk",
+                            forwardSearchAfter = true,
+                            onSave = true
+                        },
+                    },
+                },
+            })
+            vim.lsp.enable { "texlab" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls
             vim.lsp.enable { "fortls" }
         end,
+    },
+    -- https://github.com/f3fora/nvim-texlabconfig?tab=readme-ov-file#installation
+    {
+        "f3fora/nvim-texlabconfig",
+        config = function(_, opts)
+            require("texlabconfig").setup(opts)
+        end,
+        ft = { "tex", "bib" },
+        build = "go build",
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
     {
