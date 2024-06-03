@@ -152,8 +152,6 @@ require("lazy").setup {
                     vim.keymap.set('n', '<C-s>', "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
-            -- show line numbers in preview
-            vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
             -- https://www.reddit.com/r/neovim/comments/wscfar/comment/ikxnw81/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
             vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
                 vim.lsp.handlers.hover,
@@ -245,6 +243,7 @@ require("lazy").setup {
             telescope.setup(opts)
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
+            vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
         end,
     },
     -- https://github.com/nvim-telescope/telescope-file-browser.nvim?tab=readme-ov-file#installation
