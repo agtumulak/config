@@ -49,6 +49,15 @@ require("lazy").setup({
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
+                build = "make install_jsregexp",
+                config = function(_, opts)
+                    require("luasnip.loaders.from_vscode").lazy_load()
+                    require("luasnip").setup(opts)
+                end,
+                dependencies = {
+                    "rafamadriz/friendly-snippets",
+                    "saadparwaiz1/cmp_luasnip",
+                },
             },
             -- https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#mapping-cr
             {
@@ -79,45 +88,42 @@ require("lazy").setup({
                 -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
                 mapping = cmp.mapping.preset.insert {
                     ["<C-p>"] = cmp.mapping.complete(),
-                    ["<Tab>"] = cmp.mapping(
-                        function(fallback)
-                            if cmp.visible() then
-                                cmp.select_next_item()
-                            elseif luasnip.expand_or_jumpable() then
-                                luasnip.expand_or_jump()
-                            elseif has_words_before() then
-                                cmp.complete()
+                    ["<CR>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if luasnip.expandable() then
+                                luasnip.expand()
                             else
-                                fallback()
+                                cmp.confirm({
+                                    select = true,
+                                })
                             end
-                        end,
-                        { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(
-                        function(fallback)
-                            if cmp.visible() then
-                                cmp.select_prev_item()
-                            elseif luasnip.jumpable(-1) then
-                                luasnip.jump(-1)
-                            else
-                                fallback()
-                            end
-                        end,
-                        { "i", "s" }),
-                    ["<CR>"] = cmp.mapping({
-                        i = function(fallback)
-                            if cmp.visible() and cmp.get_active_entry() then
-                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                            else
-                                fallback()
-                            end
-                        end,
-                        s = cmp.mapping.confirm({ select = true }),
-                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    }),
+                        else
+                            fallback()
+                        end
+                    end),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 },
                 sources = cmp.config.sources {
                     { name = "nvim_lsp", },
                     { name = "nvim_lsp_signature_help", },
+                    { name = "luasnip", },
                     { name = "path", },
                     { name = "buffer", },
                 },
