@@ -429,9 +429,9 @@ require("lazy").setup({
             "tpope/vim-fugitive",
         },
     },
-    -- https://github.com/lukoshkin/highlight-whitespace?tab=readme-ov-file#installation
+    -- https://github.com/kaplanz/retrail.nvim
     {
-        "lukoshkin/highlight-whitespace",
-        config = true,
+        "kaplanz/retrail.nvim",
+        opts = { trim = { auto = false, }, },
     },
 }, { ui = { border = "rounded" } })
