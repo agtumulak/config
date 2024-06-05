@@ -36,7 +36,7 @@ export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-p
 
 ## aliases
 
-alias diff='diff --side-by-side --color=auto'
+alias diff='delta'
 alias less='less -R' # https://spack.readthedocs.io/en/latest/basic_usage.html#basic-usage
 alias ls='ls --color=auto' # color
 alias ll='ls -al' # long
