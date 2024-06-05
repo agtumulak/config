@@ -53,6 +53,7 @@ require("lazy").setup({
                 config = function(_, opts)
                     require("luasnip.loaders.from_vscode").lazy_load()
                     require("luasnip").setup(opts)
+                    require("luasnip").filetype_extend("cpp", { "cppdoc" })
                 end,
                 dependencies = {
                     "rafamadriz/friendly-snippets",
