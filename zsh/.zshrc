@@ -55,6 +55,8 @@ alias ls='ls --color=auto' # color
 alias ll='ls -al' # long
 alias tmux='tmux -u' # https://github.com/jeffreytse/zsh-vi-mode
 alias vim='nvim'
+alias syncrl='xclip -o -select clipboard | pbcopy'
+alias synclr='pbpaste | xclip -i -select clipboard'
 
 # https://github.com/sharkdp/bat
 alias cat='bat --theme base16-256'
