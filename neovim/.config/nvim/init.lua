@@ -279,6 +279,7 @@ require("lazy").setup({
         event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "jonarrien/telescope-cmdline.nvim",
             "nvim-treesitter/nvim-treesitter",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -287,6 +288,7 @@ require("lazy").setup({
             },
         },
         keys = {
+            { "<leader>;",  "<cmd>Telescope cmdline<cr>",    desc = "Cmdline" },
             { "<leader>fd", "<cmd>Telescope find_files<cr>", desc = "Search with `fd`" },
             { "<leader>rg", "<cmd>Telescope live_grep<cr>",  desc = "Search with `rg`" },
             { "<leader>b",  "<cmd>Telescope buffers<cr>",    desc = "Search buffers" },
@@ -315,6 +317,7 @@ require("lazy").setup({
             telescope.setup(opts)
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
+            telescope.load_extension("cmdline")
             vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
         end,
     },
