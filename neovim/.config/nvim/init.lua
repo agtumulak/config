@@ -269,6 +269,7 @@ require("lazy").setup({
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
+            require("nvim-treesitter.install").compilers = { "clang" }
             vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
         end,
     },
