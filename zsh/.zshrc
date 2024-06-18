@@ -1,3 +1,9 @@
+## system specific
+
+# mcnp
+export DATAPATH=/Users/atumulak/Developer/ace-libraries
+export path=("/Users/atumulak/Developer/mcnp6/build" $path)
+
 # enable fzf
 eval "$(fzf --zsh)"
 
