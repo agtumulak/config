@@ -11,6 +11,7 @@ vim.opt.scrolloff = 999
 vim.filetype.add {
     extension = {
         ["mcnp"] = "mcnp",
+        ["code-snippets"] = "json",
     },
 }
 
@@ -260,6 +261,8 @@ require("lazy").setup({
             }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cmake
             lspconfig.cmake.setup {}
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
+            lspconfig.jsonls.setup {}
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
