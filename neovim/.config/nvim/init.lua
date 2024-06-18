@@ -8,6 +8,11 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 999
+vim.filetype.add {
+    extension = {
+        ["mcnp"] = "mcnp",
+    },
+}
 
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -442,5 +447,9 @@ require("lazy").setup({
     {
         "kaplanz/retrail.nvim",
         opts = { trim = { auto = false, }, },
+    },
+    -- https://github.com/g2boojum/vim-mcnp
+    {
+        "g2boojum/vim-mcnp",
     },
 }, { ui = { border = "rounded" } })
