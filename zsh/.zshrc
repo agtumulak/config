@@ -1,3 +1,9 @@
+## system specific
+
+# mcnp
+export DATAPATH=/Users/atumulak/Developer/ndatk-data
+export path=("/Users/atumulak/Developer/mcnp63/build" $path)
+
 # enable fzf
 eval "$(fzf --zsh)"
 
