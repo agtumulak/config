@@ -1,0 +1,131 @@
+{
+    "MCNP Input": {
+        "prefix": [
+            "mcnp"
+        ],
+        "body": [
+            "${1:Title Card}",
+            "c Cell Card Block",
+            "",
+            "c Surface Card Block",
+            "",
+            "c Data Card Block"
+        ],
+        "scope": "mcnp"
+    },
+    "Cell Card": {
+        "prefix": [
+            "cell"
+        ],
+        "body": [
+            "${1:cell#} ${2:material#} ${3:density} ${4:surfaces} imp:${5|n,p,e|}=${6:importance}"
+        ],
+        "scope": "mcnp"
+    },
+    "Plane Normal to X Axis Card": {
+        "prefix": [
+            "surface plane x-axis",
+            "px"
+        ],
+        "body": [
+            "${1:surface#} px ${2:x-intercept}"
+        ],
+        "scope": "mcnp"
+    },
+    "Plane Normal to Z Axis Card": {
+        "prefix": [
+            "surface plane z-axis",
+            "pz"
+        ],
+        "body": [
+            "${1:surface#} pz ${2:x-intercept}"
+        ],
+        "scope": "mcnp"
+    },
+    "Sphere at Origin Card": {
+        "prefix": [
+            "surface sphere origin",
+            "so"
+        ],
+        "body": [
+            "${1:surface#} so ${2:radius}"
+        ],
+        "scope": "mcnp"
+    },
+    "Sphere at Given Position Card": {
+        "prefix": [
+            "surface sphere position"
+        ],
+        "body": [
+            "${1:surface#} s ${2:x-pos} ${3:y-pos} ${4:z-pos} ${5:radius}"
+        ],
+        "scope": "mcnp"
+    },
+    "Cylinder on Z Axis Card": {
+        "prefix": [
+            "surface cylinder z-axis",
+            "cz"
+        ],
+        "body": [
+            "${1:surface#} cz ${2:radius}"
+        ],
+        "scope": "mcnp"
+    },
+    "Right Circular Cylinder": {
+        "prefix": [
+            "surface right circular cylinder",
+            "rcc"
+        ],
+        "body": [
+            "${1:surface#} rcc ${2:base-x} ${3:base-y} ${4:base-z} ${5:height-x} ${6:height-y} ${7:height-z} ${8:radius}"
+        ],
+        "scope": "mcnp"
+    },
+    "Criticality Calculation": {
+        "prefix": "kcode",
+        "body": [
+            "kcode ${1:histories} ${2:k-guess} ${3:cycles-skip} ${4:cycles-total}",
+            "ksrc ${5:x-pos} ${6:y-pos} ${7:z-pos}"
+        ],
+        "scope": "mcnp"
+    },
+    "Material Card": {
+        "prefix": "material",
+        "body": [
+            "m${1:material#} ${2:zaid} ${3:fraction}"
+        ],
+        "scope": "mcnp"
+    },
+    "Isotope Card": {
+        "prefix": "isotope",
+        "body": [
+            "${1:zaid} ${2:fraction}"
+        ],
+        "scope": "mcnp"
+    },
+    "Fixed Source ": {
+        "prefix": [
+            "source fixed",
+            "sdef"
+        ],
+        "body": [
+            "sdef pos=${1:x-pos} ${2:y-pos} ${3:z-pos} erg=${4:energy}",
+            "nps ${5:number}"
+        ],
+        "scope": "mcnp"
+    },
+    "Point Tally Card": {
+        "prefix": "tally point",
+        "body": [
+            "f5:${1|n,p,e|} ${2:x-pos} ${3:y-pos} ${4:z-pos} ${5:radius}"
+        ],
+        "scope": "mcnp"
+    },
+    "Random Number Cardd": {
+        "prefix": "rand",
+        "body": [
+            "rand seed=${1:seed}"
+        ],
+        "scope": "mcnp"
+    }
+}
