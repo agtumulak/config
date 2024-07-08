@@ -1,0 +1,27 @@
+{
+    "name": "mcnp-snippets",
+    "version": "0.1.0",
+    "publisher": "Aaron G. Tumulak",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "mcnp",
+                "extensions": [
+                    ".mcnp"
+                ]
+            }
+        ],
+        "snippets": [
+            {
+                "language": "mcnp",
+                "path": "./snippets/mcnp.json"
+            }
+        ]
+    }
+}
