@@ -460,4 +460,20 @@ require("lazy").setup({
     {
         "g2boojum/vim-mcnp",
     },
+    -- https://github.com/David-Kunz/gen.nvim?tab=readme-ov-file#install
+    -- https://re-git.lanl.gov/tpburke/neovim-config/-/blob/615c019f17a7a369d44c15418f836485016a0bc3/lua/plugins/ai/init.lua
+    {
+        "David-Kunz/gen.nvim",
+        opts = {
+            model = "codegemma:7b",
+            host = "mccoy",
+            port = "60003",
+            display_mode = "float",
+            show_prompt = true,
+            show_model = true,
+        },
+        keys = {
+            { "<leader>ai", ":Gen<CR>", {}, mode = { "n", "v" }, desc = "Provide prompt for generative AI" },
+        },
+    },
 }, { ui = { border = "rounded" } })
