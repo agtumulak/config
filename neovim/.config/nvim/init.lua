@@ -364,30 +364,29 @@ require("lazy").setup({
             { "<leader>o",  function() require("telescope.builtin").jumplist { show_line = false } end, desc = "Search jumplist" },
             { "z=",         function() require("telescope.builtin").spell_suggest {} end,               desc = "List spelling suggestions" },
         },
-        opts = {
-            defaults = {
-                layout_strategy = "vertical",
-            },
-            extensions = {
-                file_browser = {
-                    mappings = {
-                        n = {
-                            ["h"] = function(prompt_bufnr, bypass)
-                                require("telescope").extensions.file_browser.actions
-                                    .goto_parent_dir(prompt_bufnr, bypass)
-                            end,
-                            ["l"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) end,
+        config = function()
+            local telescope = require("telescope")
+            telescope.setup {
+                defaults = {
+                    layout_strategy = "vertical",
+                },
+                extensions = {
+                    file_browser = {
+                        mappings = {
+                            n = {
+                                ["h"] = function(prompt_bufnr, bypass)
+                                    require("telescope").extensions.file_browser.actions
+                                        .goto_parent_dir(prompt_bufnr, bypass)
+                                end,
+                                ["l"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) end,
+                            },
                         },
                     },
+                    ["ui-select"] = { require("telescope.themes").get_dropdown {} }
                 },
-            },
-        },
-        config = function(_, opts)
-            local telescope = require("telescope")
-            telescope.setup(opts)
+            }
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
-            telescope.load_extension("ui-select")
             vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
         end,
     },
@@ -548,4 +547,43 @@ require("lazy").setup({
     },
     -- https://github.com/artemave/workspace-diagnostics.nvim?tab=readme-ov-file#-installation
     { "artemave/workspace-diagnostics.nvim" },
+    -- https://github.com/David-Kunz/gen.nvim?tab=readme-ov-file#install
+    -- https://ddw-confluence.lanl.gov/display/XCP3GROUP/LLM+AI+Resources
+    {
+        "David-Kunz/gen.nvim",
+        opts = {
+            model = "llama3.3:70b",
+            host = "lilgun.lanl.gov",
+            port = "60003",
+            display_mode = "split",
+            show_model = true,
+        },
+        keys = {
+            { "<leader>ai", ":Gen<CR>", {}, mode = { "n", "v" }, desc = "Provide prompt for generative AI" },
+        },
+        config = function(_, opts)
+            require("gen").setup(opts)
+            require("gen").prompts = {
+                ["Chat"] = {
+                    prompt = "$input",
+                },
+                ["Explain code"] = {
+                    prompt =
+                    "Explain the following code:\n```$filetype\n$text\n```\n\nBegin the explaination by restating the code in format ```$filetype\n...\n```\n\n$input",
+                },
+                ["Modify code"] = {
+                    prompt =
+                    "$input:\n```$filetype\n$text\n```\n\nOnly output the result in format ```$filetype\n...\n```",
+                    replace = true,
+                    extract = "```$filetype\n(.-)```",
+                },
+                ["Generate code"] = {
+                    prompt =
+                    "Output $filetype code in a single block with format ```$filetype\n...\n```\n\nwith prompt: $input",
+                    replace = true,
+                    extract = "```$filetype\n(.-)```",
+                },
+            }
+        end,
+    },
 }, { ui = { border = "rounded" } })
