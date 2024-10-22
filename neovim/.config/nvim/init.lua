@@ -308,11 +308,12 @@ require("lazy").setup({
             },
         },
         keys = {
-            { "<leader>;",  "<cmd>Telescope cmdline<cr>",    desc = "Cmdline" },
-            { "<leader>fd", "<cmd>Telescope find_files<cr>", desc = "Search with `fd`" },
-            { "<leader>rg", "<cmd>Telescope live_grep<cr>",  desc = "Search with `rg`" },
-            { "<leader>b",  "<cmd>Telescope buffers<cr>",    desc = "Search buffers" },
-            { "<leader>h",  "<cmd>Telescope help_tags<cr>",  desc = "Search help tags" },
+            { "<leader>;",  "<cmd>Telescope cmdline<cr>",                                               desc = "Cmdline" },
+            { "<leader>fd", "<cmd>Telescope find_files<cr>",                                            desc = "Search with `fd`" },
+            { "<leader>rg", "<cmd>Telescope live_grep<cr>",                                             desc = "Search with `rg`" },
+            { "<leader>b",  "<cmd>Telescope buffers<cr>",                                               desc = "Search buffers" },
+            { "<leader>h",  "<cmd>Telescope help_tags<cr>",                                             desc = "Search help tags" },
+            { "<leader>o",  function() require("telescope.builtin").jumplist { show_line = false } end, desc = "Search jumplist" },
         },
         opts = {
             defaults = {
