@@ -185,6 +185,7 @@ require("lazy").setup({
                 tag = "v1.29.0",
                 dependencies = {
                     {
+                        -- clangd provided by mason does not find GLIBC_2.18, use spack llvm
                         "williamboman/mason.nvim",
                         -- TODO: Repalce with a version tag once the following is merged:
                         -- https://github.com/williamboman/mason.nvim/pull/1639
