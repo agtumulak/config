@@ -273,8 +273,13 @@ require("lazy").setup({
                         { buffer = bufnr, desc = "Autoformat with yamlfmt" })
                 end,
             }
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls
-            lspconfig.fortls.setup {}
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fortls
+            lspconfig.fortls.setup {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>m", function() vim.cmd "!fprettify --indent 4 --line-length 132 %" end,
+                        { buffer = bufnr, desc = "Autoformat with fprettify" })
+                end,
+            }
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
