@@ -14,19 +14,26 @@ source /local/atumulak/spack/var/spack/environments/base/loads
 # enable fzf
 eval "$(fzf --zsh)"
 
-# https://ddw-confluence.lanl.gov/pages/viewpage.action?pageId=543752231
-source /home/xshares/PROJECTS/mcatk/modules/setup_mcatk_modules.sh
-# ADX modules were reorganized. This flattens the search paths.
-module use /opt/local/packages/Modules/default/modulefiles/compiler
-module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc
-module use /opt/local/packages/Modules/default/modulefiles/mpi
-module use /opt/local/packages/Modules/default/modulefiles/tools
-
-# node
+# https://github.com/nvm-sh/nvm/issues/2724#issuecomment-1336795452
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use v16.20.2
+lazy_load_nvm() {
+    unset -f node nvm npm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm use v16.20.2
+}
+node() {
+    lazy_load_nvm
+    node $@
+}
+nvm() {
+    lazy_load_nvm
+    nvm $@
+}
+npm() {
+    lazy_load_nvm
+    npm $@
+}
 
 # # load spack-environment modules
 # source /home/atumulak/Developer/spack-environments/modules/setup_mcatk_modules.sh
