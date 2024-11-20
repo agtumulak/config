@@ -5,7 +5,14 @@ export no_proxy="localhost,127.0.0.1,.lanl.gov"
 
 # https://ddw-confluence.lanl.gov/display/ADXComputing/Modules
 source /opt/local/packages/Modules/default/init/zsh
-module use /opt/local/packages/Modules/5.1.1/modulefiles/debugger
+
+# make packages available
+module use /opt/local/packages/Modules/default/modulefiles/debugger # gdb, totalview
+module use /opt/local/packages/Modules/default/modulefiles/compiler # needed by mcnp6 module
+module use /opt/local/packages/Modules/default/modulefiles/mpi # needed by mcnp6 module
+module use /opt/local/codes/mcnp/modules # https://ddw-confluence.lanl.gov/display/MCPUB/MCNP+Use+on+HPC+and+ADX+LAN
+module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc # needed for `module load gcc` used by `setup_mcatk_modules.sh`
+source /home/xshares/PROJECTS/mcatk/modules/setup_mcatk_modules.sh # https://ddw-confluence.lanl.gov/pages/viewpage.action?pageId=543752231
 
 # lazy load spack and base environment
 lazy_load_spack() {
@@ -42,12 +49,6 @@ npm() {
     lazy_load_nvm
     npm $@
 }
-
-# # load spack-environment modules
-# source /home/atumulak/Developer/spack-environments/modules/setup_mcatk_modules.sh
-
-# https://ddw-confluence.lanl.gov/display/MCPUB/MCNP+Use+on+HPC+and+ADX+LAN
-module use /opt/local/codes/mcnp/modules
 
 # https://unix.stackexchange.com/a/414434
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
