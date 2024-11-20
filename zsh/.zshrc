@@ -7,8 +7,16 @@ export no_proxy="localhost,127.0.0.1,.lanl.gov"
 source /opt/local/packages/Modules/default/init/zsh
 module use /opt/local/packages/Modules/5.1.1/modulefiles/debugger
 
-# load spack and base environment
-source /local/atumulak/spack/share/spack/setup-env.sh
+# lazy load spack and base environment
+lazy_load_spack() {
+    unset -f spack
+    source /local/atumulak/spack/share/spack/setup-env.sh
+}
+spack () {
+    lazy_load_spack
+    spack $@
+}
+module use /local/atumulak/spack/share/spack/modules/linux-rhel7-cascadelake
 source /local/atumulak/spack/var/spack/environments/base/loads
 
 # enable fzf
