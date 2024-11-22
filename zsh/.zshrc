@@ -67,3 +67,7 @@ bindkey '^?' backward-delete-char # https://superuser.com/a/533685
 path=(/usr/local/cuda/bin $path)
 typeset -T -gxU LD_LIBRARY_PATH ld_library_path
 ld_library_path=(/usr/local/cuda/lib64)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
