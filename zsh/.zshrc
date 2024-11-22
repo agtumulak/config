@@ -52,9 +52,9 @@ alias vim='nvim'
 alias fd='fdfind'
 
 # https://github.com/sharkdp/bat
-alias cat='bat --theme base16-256'
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias cat='batcat --theme base16-256'
+alias -g -- -h='-h 2>&1 | batcat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | batcat --language=help --style=plain'
 
 ## keybindings
 
