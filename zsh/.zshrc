@@ -14,6 +14,9 @@ module use /opt/local/codes/mcnp/modules # https://ddw-confluence.lanl.gov/displ
 module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc # needed for `module load gcc` used by `setup_mcatk_modules.sh`
 source /home/xshares/PROJECTS/mcatk/modules/setup_mcatk_modules.sh # https://ddw-confluence.lanl.gov/pages/viewpage.action?pageId=543752231
 
+# clangd without > GLIBC_2.18 requirement
+export path=("/home/xshares/PROJECTS/mcatk/devtools/default/packages/clangd/bin" $path)
+
 # lazy load spack and base environment
 lazy_load_spack() {
     unset -f spack
