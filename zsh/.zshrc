@@ -71,3 +71,11 @@ ld_library_path=(/usr/local/cuda/lib64)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# https://superuser.com/a/1750087
+function vi-yank-xclip {
+    zle vi-yank
+    echo "$CUTBUFFER" | clip.exe
+}
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
