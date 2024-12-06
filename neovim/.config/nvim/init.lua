@@ -251,7 +251,7 @@ require("lazy").setup({
                     "--background-index",
                 },
             }
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
             -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
             lspconfig.pyright.setup {
                 on_attach = function(_, bufnr)
