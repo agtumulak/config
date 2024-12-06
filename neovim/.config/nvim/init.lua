@@ -249,6 +249,7 @@ require("lazy").setup({
                 cmd = {
                     "clangd",
                     "--background-index",
+                    "--clang-tidy"
                 },
             }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
