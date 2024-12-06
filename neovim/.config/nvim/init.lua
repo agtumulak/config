@@ -306,6 +306,7 @@ require("lazy").setup({
                 build =
                 "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
             },
+            "nvim-telescope/telescope-ui-select.nvim",
         },
         keys = {
             { "<leader>;",  "<cmd>Telescope cmdline<cr>",                                               desc = "Cmdline" },
@@ -331,6 +332,9 @@ require("lazy").setup({
                         },
                     },
                 },
+                ["ui-select"] = {
+                    layout_strategy = "center",
+                }
             },
         },
         config = function(_, opts)
@@ -339,6 +343,7 @@ require("lazy").setup({
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("cmdline")
+            telescope.load_extension("ui-select")
             vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
         end,
     },
