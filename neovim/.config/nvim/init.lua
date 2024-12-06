@@ -293,6 +293,13 @@ require("lazy").setup({
             vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
         end,
     },
+    -- https://github.com/nvim-treesitter/nvim-treesitter-context?tab=readme-ov-file#configuration
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = {
+            enable = true, -- no clue why it's disabled by default
+        }
+    },
     -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#installation
     {
         "nvim-telescope/telescope.nvim",
