@@ -435,8 +435,12 @@ require("lazy").setup({
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
         ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
+        -- https://github.com/iamcco/markdown-preview.nvim/issues/690
+        build = "cd app && npm install",
     },
     -- https://github.com/rbong/vim-flog?tab=readme-ov-file#installation
     {
