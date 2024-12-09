@@ -23,6 +23,9 @@ antidote load # loads .zsh_plugins.txt
 # pipx
 export PATH="$PATH:/Users/atumulak/.local/bin"
 
+# poetry
+fpath+=~/.zfunc
+
 # tab completion style
 zstyle ':completion:*' menu select
 zstyle ':completion:*' file-list all
