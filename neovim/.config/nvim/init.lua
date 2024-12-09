@@ -407,7 +407,7 @@ require("lazy").setup({
                     return "<Ignore>"
                 end, { expr = true })
                 -- keymaps
-                map("n", "<leader>hb", function() gs.blame_line { full = true } end)
+                map("n", "<leader>hb", function() gs.blame_line { full = true, ignore_whitespace = true } end)
                 map("n", "<leader>hs", gs.stage_hunk)
                 map("v", "<leader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end)
                 map("n", "<leader>hu", gs.reset_hunk)
