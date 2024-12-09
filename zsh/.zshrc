@@ -20,6 +20,9 @@ setopt auto_pushd
 source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 antidote load # loads .zsh_plugins.txt
 
+# pipx
+export PATH="$PATH:/Users/atumulak/.local/bin"
+
 # tab completion style
 zstyle ':completion:*' menu select
 zstyle ':completion:*' file-list all
