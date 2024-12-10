@@ -207,6 +207,10 @@ require("lazy").setup({
                     vim.keymap.set("n", "gd",
                         function() require("telescope.builtin").lsp_definitions { show_line = false } end, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "D", vim.diagnostic.open_float, opts)
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+                    vim.keymap.set("n", "<leader>d", require("telescope.builtin").diagnostics, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gr",
@@ -223,6 +227,10 @@ require("lazy").setup({
                 vim.lsp.handlers.hover,
                 { border = "rounded" }
             )
+            -- https://www.reddit.com/r/neovim/comments/wubpwu/comment/il8yxdp/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+            vim.diagnostic.config {
+                float = { border = "rounded" }
+            }
             -- https://github.com/neovim/nvim-lspconfig/issues/3158
             require("lspconfig.ui.windows").default_options.border = "rounded"
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
