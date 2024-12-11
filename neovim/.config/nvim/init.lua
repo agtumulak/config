@@ -256,6 +256,9 @@ require("lazy").setup({
                     "--background-index",
                     "--clang-tidy"
                 },
+                on_attach = function(client, bufnr)
+                    require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+                end
             }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
             -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
@@ -509,4 +512,6 @@ require("lazy").setup({
             },
         },
     },
+    -- https://github.com/artemave/workspace-diagnostics.nvim?tab=readme-ov-file#-installation
+    { "artemave/workspace-diagnostics.nvim" },
 }, { ui = { border = "rounded" } })
