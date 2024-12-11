@@ -210,15 +210,12 @@ require("lazy").setup({
                     vim.keymap.set("n", "D", vim.diagnostic.open_float, opts)
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
                     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "<leader>d", require("telescope.builtin").diagnostics, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gr",
                         function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
                     vim.keymap.set({ "n", "v" }, "<leader>m",
                         function() vim.lsp.buf.format { async = true } end, opts)
-                    vim.keymap.set("n", "<leader>s",
-                        function() require("telescope.builtin").lsp_document_symbols { symbol_width = 40 } end, opts)
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
@@ -476,5 +473,34 @@ require("lazy").setup({
     -- https://github.com/g2boojum/vim-mcnp
     {
         "g2boojum/vim-mcnp",
+    },
+    -- https://github.com/folke/trouble.nvim?tab=readme-ov-file#-installation
+    {
+        "folke/trouble.nvim",
+        version = "v3.6.*",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>d",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>db",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>s",
+                "<cmd>Trouble symbols toggle focus=false win.position=left win.size=0.25<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>l",
+                "<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.25<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+        },
     },
 }, { ui = { border = "rounded" } })
