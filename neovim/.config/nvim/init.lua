@@ -217,8 +217,6 @@ require("lazy").setup({
                         function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
                     vim.keymap.set({ "n", "v" }, "<leader>m",
                         function() vim.lsp.buf.format { async = true } end, opts)
-                    vim.keymap.set("n", "<leader>s",
-                        function() require("telescope.builtin").lsp_document_symbols { symbol_width = 40 } end, opts)
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
@@ -476,5 +474,34 @@ require("lazy").setup({
     -- https://github.com/g2boojum/vim-mcnp
     {
         "g2boojum/vim-mcnp",
+    },
+    -- https://github.com/folke/trouble.nvim?tab=readme-ov-file#-installation
+    {
+        "folke/trouble.nvim",
+        version = "v3.6.*",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>x",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xb",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>s",
+                "<cmd>Trouble symbols toggle focus=false win.position=left win.size=0.25<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>l",
+                "<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.25<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+        },
     },
 }, { ui = { border = "rounded" } })
