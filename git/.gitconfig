@@ -23,5 +23,6 @@
         colorMoved = default
 [alias]
 	ch = checkout
+    co = commit
 	st = status
     logg = !nvim -c \"Flog -all\"
