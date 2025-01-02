@@ -331,6 +331,7 @@ require("lazy").setup({
             { "<leader>b",  "<cmd>Telescope buffers<cr>",                                               desc = "Search buffers" },
             { "<leader>h",  "<cmd>Telescope help_tags<cr>",                                             desc = "Search help tags" },
             { "<leader>o",  function() require("telescope.builtin").jumplist { show_line = false } end, desc = "Search jumplist" },
+            { "z=",         function() require("telescope.builtin").spell_suggest {} end,               desc = "List spelling suggestions" },
         },
         opts = {
             defaults = {
