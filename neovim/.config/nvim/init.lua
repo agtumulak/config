@@ -458,6 +458,11 @@ require("lazy").setup({
         -- https://github.com/iamcco/markdown-preview.nvim/issues/690
         build = "cd app && npm install",
     },
+    -- https://github.com/tpope/vim-fugitive
+    {
+        "tpope/vim-fugitive",
+        cmd = { "Git" },
+    },
     -- https://github.com/rbong/vim-flog?tab=readme-ov-file#installation
     {
         "rbong/vim-flog",
