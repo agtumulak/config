@@ -230,7 +230,7 @@ require("lazy").setup({
             }
             -- https://github.com/neovim/nvim-lspconfig/issues/3158
             require("lspconfig.ui.windows").default_options.border = "rounded"
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
             lspconfig.lua_ls.setup {
                 on_init = function(client)
                     local path = client.workspace_folders[1].name
@@ -249,7 +249,7 @@ require("lazy").setup({
                 settings = { Lua = {} },
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
             }
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
             lspconfig.clangd.setup {
                 cmd = {
                     "clangd",
@@ -268,9 +268,9 @@ require("lazy").setup({
                         { buffer = bufnr, desc = "Autoformat with Black" })
                 end,
             }
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cmake
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake
             lspconfig.cmake.setup {}
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
             lspconfig.jsonls.setup {}
         end,
     },
