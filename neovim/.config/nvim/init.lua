@@ -272,6 +272,13 @@ require("lazy").setup({
             lspconfig.cmake.setup {}
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
             lspconfig.jsonls.setup {}
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
+            lspconfig.yamlls.setup {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>m", function() vim.cmd "!yamlfmt %" end,
+                        { buffer = bufnr, desc = "Autoformat with yamlfmt" })
+                end,
+            }
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
