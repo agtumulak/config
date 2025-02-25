@@ -526,4 +526,54 @@ require("lazy").setup({
     },
     -- https://github.com/artemave/workspace-diagnostics.nvim?tab=readme-ov-file#-installation
     { "artemave/workspace-diagnostics.nvim" },
+    -- https://codecompanion.olimorris.dev/installation.html#installation
+    -- https://ddw-confluence.lanl.gov/display/XCP3GROUP/LLM+AI+Resources
+    {
+        "olimorris/codecompanion.nvim",
+        config = true,
+        opts = {
+            strategies = {
+                chat = { adapter = "ollama", },
+                inline = { adapter = "ollama" },
+            },
+            adapters = {
+                ollama = function()
+                    return require("codecompanion.adapters").extend("ollama", {
+                        schema = {
+                            model = {
+                                default = "llama3.3:70b",
+                            },
+                        },
+                        display = {
+                            action_palette = {
+                                provider = "telescope",
+                            },
+                        },
+                        env = {
+                            url = "OLLAMA_URL",
+                            api_key = "OLLAMA_API_KEY",
+                        },
+                        headers = {
+                            ["Content-Type"] = "application/json",
+                            ["Authorization"] = "Bearer ${api_key}",
+                        },
+                        parameters = {
+                            sync = true,
+                        },
+                    })
+                end,
+            },
+        },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        keys = {
+            {
+                "<leader>ai",
+                "<cmd>CodeCompanionActions<cr>",
+                mode = { "n", "v" },
+            }
+        }
+    },
 }, { ui = { border = "rounded" } })
