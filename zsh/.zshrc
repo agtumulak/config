@@ -1,8 +1,5 @@
 ## system specific
 
-# proxy
-export no_proxy="localhost,127.0.0.1,.lanl.gov"
-
 # https://ddw-confluence.lanl.gov/display/ADXComputing/Modules
 source /opt/local/packages/Modules/default/init/zsh
 
