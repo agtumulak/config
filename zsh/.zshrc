@@ -1,30 +1,19 @@
 ## system specific
 
-# https://ddw-confluence.lanl.gov/display/ADXComputing/Modules
-source /opt/local/packages/Modules/default/init/zsh
+# see ``RedHat 8 systems status'' email by 'frederick@lanl.gov'
+source /opt/local/software/RHEL8/modules/modules-5.4.0/init/profile.sh
+source /opt/local/software/RHEL8/modules/modules-5.4.0/init/fixpath.sh
 
 # make packages available
 module use /opt/local/packages/Modules/default/modulefiles/debugger # gdb, totalview
 module use /opt/local/packages/Modules/default/modulefiles/compiler # needed by mcnp6 module
 module use /opt/local/packages/Modules/default/modulefiles/mpi # needed by mcnp6 module
 module use /opt/local/codes/mcnp/modules # https://ddw-confluence.lanl.gov/display/MCPUB/MCNP+Use+on+HPC+and+ADX+LAN
-module use /opt/local/packages/Modules/default/modulefiles/compiler-gcc # needed for `module load gcc` used by `setup_mcatk_modules.sh`
 source /home/xshares/PROJECTS/mcatk/modules/setup_mcatk_modules.sh # https://ddw-confluence.lanl.gov/pages/viewpage.action?pageId=543752231
 
-# clangd without > GLIBC_2.18 requirement
-export path=("/home/xshares/PROJECTS/mcatk/devtools/default/packages/clangd/bin" $path)
-
-# lazy load spack and base environment
-lazy_load_spack() {
-    unset -f spack
-    source /local/atumulak/spack/share/spack/setup-env.sh
-}
-spack () {
-    lazy_load_spack
-    spack $@
-}
-module use /local/atumulak/spack/share/spack/modules/linux-rhel7-cascadelake
-source /local/atumulak/spack/var/spack/environments/base/loads
+# load development environment
+module use /local/atumulak/spack/share/spack/modules/linux-rhel8-skylake_avx512
+module load -s bat fzf htop neovim tmux xclip git-delta
 
 # enable fzf
 eval "$(fzf --zsh)"
@@ -105,20 +94,3 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 bindkey -v # https://stackoverflow.com/a/58188295
 bindkey '^?' backward-delete-char # https://superuser.com/a/533685
-
-# you must run `spack env activate base` to use conda
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/local/atumulak/spack/opt/spack/linux-rhel7-cascadelake/gcc-11.2.0/miniconda3-22.11.1-sarjmvkb5jbireit7ejgvp3eq6uy75gq/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/local/atumulak/spack/opt/spack/linux-rhel7-cascadelake/gcc-11.2.0/miniconda3-22.11.1-sarjmvkb5jbireit7ejgvp3eq6uy75gq/etc/profile.d/conda.sh" ]; then
-        . "/local/atumulak/spack/opt/spack/linux-rhel7-cascadelake/gcc-11.2.0/miniconda3-22.11.1-sarjmvkb5jbireit7ejgvp3eq6uy75gq/etc/profile.d/conda.sh"
-    else
-        export PATH="/local/atumulak/spack/opt/spack/linux-rhel7-cascadelake/gcc-11.2.0/miniconda3-22.11.1-sarjmvkb5jbireit7ejgvp3eq6uy75gq/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
