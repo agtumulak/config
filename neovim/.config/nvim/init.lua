@@ -301,7 +301,6 @@ require("lazy").setup({
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
             require("nvim-treesitter.install").compilers = { "clang" }
-            vim.api.nvim_set_hl(0, "@markup.link.url.markdown_inline", { link = "Comment" })
         end,
     },
     -- https://github.com/nvim-treesitter/nvim-treesitter-context?tab=readme-ov-file#configuration
@@ -561,5 +560,21 @@ require("lazy").setup({
                 mode = { "n", "v" },
             }
         }
+    },
+    -- https://github.com/MeanderingProgrammer/render-markdown.nvim
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = { "markdown", "codecompanion" },
+        dependencies = { "RRethy/base16-nvim" },
+        opts = {
+            completions = { lsp = { enabled = true } },
+            render_modes = true,
+            sign = { enabled = false, },
+        },
+        config = function(_, opts)
+            require("render-markdown").setup(opts)
+            vim.api.nvim_set_hl(0, "RenderMarkdownChecked", { link = "DiffAdd" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownUnchecked", { link = "@markup.list.unchecked.markdown" })
+        end,
     },
 }, { ui = { border = "rounded" } })
