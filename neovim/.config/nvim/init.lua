@@ -559,15 +559,15 @@ require("lazy").setup({
         config = true,
         opts = {
             strategies = {
-                chat = { adapter = "ollama", },
-                inline = { adapter = "ollama" },
+                chat = { adapter = "sambanova", },
+                inline = { adapter = "sambanova" },
             },
             adapters = {
                 ollama = function()
                     return require("codecompanion.adapters").extend("ollama", {
                         schema = {
                             model = {
-                                default = "llama3.3:70b",
+                                default = "llama3.3:latest",
                             },
                         },
                         display = {
@@ -585,6 +585,66 @@ require("lazy").setup({
                         },
                         parameters = {
                             sync = true,
+                        },
+                    })
+                end,
+                sambanova = function()
+                    local openai = require("codecompanion.adapters.openai")
+                    return require("codecompanion.adapters").extend("openai_compatible", {
+                        name = "sambanova",
+                        formatted_name = "sambanova",
+                        roles = {
+                            llm = "assistant",
+                            user = "user",
+                        },
+                        opts = {
+                            stream = true,
+                        },
+                        features = {
+                            text = true,
+                            tokens = true,
+                            vision = false,
+                        },
+                        env = {
+                            url = "ENDPOINT_URL",
+                            api_key = "API_KEY",
+                        },
+                        -- slightly modify the adapter to set the output's role to be assistant - sambanova didn't provide that field in the json
+                        handlers = {
+                            setup = function(self)
+                                if self.opts and self.opts.stream then
+                                    self.parameters.stream = true
+                                    self.parameters.stream_options = { include_usage = true }
+                                end
+                                return true
+                            end,
+                            tokens = function(self, data)
+                                return openai.handlers.tokens(self, data)
+                            end,
+                            form_parameters = function(self, params, messages)
+                                return openai.handlers.form_parameters(self, params, messages)
+                            end,
+                            form_messages = function(self, messages)
+                                return openai.handlers.form_messages(self, messages)
+                            end,
+                            chat_output = function(self, data)
+                                retval = openai.handlers.chat_output(self, data)
+                                if retval then
+                                    retval.output.role = "assistant"
+                                end
+                                return retval
+                            end,
+                            inline_output = function(self, data, context)
+                                return openai.handlers.inline_output(self, data, context)
+                            end,
+                            on_exit = function(self, data)
+                                return openai.handlers.on_exit(self, data)
+                            end,
+                        },
+                        schema = {
+                            model = {
+                                default = "Meta-Llama-3.3-70B-Instruct",
+                            },
                         },
                     })
                 end,
