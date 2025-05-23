@@ -8,6 +8,8 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 999
+-- https://gpanders.com/blog/whats-new-in-neovim-0-11/#improved-hover-documentation
+vim.opt.winborder = "rounded"
 vim.filetype.add {
     extension = {
         ["mcnp"] = "mcnp",
@@ -219,15 +221,6 @@ require("lazy").setup({
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
-            -- https://www.reddit.com/r/neovim/comments/wscfar/comment/ikxnw81/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover,
-                { border = "rounded" }
-            )
-            -- https://www.reddit.com/r/neovim/comments/wubpwu/comment/il8yxdp/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-            vim.diagnostic.config {
-                float = { border = "rounded" }
-            }
             -- https://github.com/neovim/nvim-lspconfig/issues/3158
             require("lspconfig.ui.windows").default_options.border = "rounded"
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
