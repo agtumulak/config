@@ -44,17 +44,6 @@ autoload -Uz compinit && compinit -u
 ## environment variables
 
 export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-plugin
-# https://trac.lanl.gov/cgi-bin/external/trac.cgi/wiki/proxy
-export HTTP_PROXY=http://proxyout.lanl.gov:8080
-export http_proxy=http://proxyout.lanl.gov:8080
-export HTTPS_PROXY=http://proxyout.lanl.gov:8080
-export https_proxy=http://proxyout.lanl.gov:8080
-export FTP_PROXY=proxyout.lanl.gov:8080
-export ftp_proxy=proxyout.lanl.gov:8080
-export RSYNC_PROXY=proxyout.lanl.gov:8080
-export rsync_proxy=proxyout.lanl.gov:8080
-export NO_PROXY=localhost,127.0.0.1,*.lanl.gov,lanl.gov
-export no_proxy=localhost,127.0.0.1,*.lanl.gov,lanl.gov
 
 ## aliases
 
