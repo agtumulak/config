@@ -565,9 +565,9 @@ require("lazy").setup({
         config = true,
         opts = {
             strategies = {
-                chat = { adapter = "sambanova", },
-                inline = { adapter = "sambanova" },
-                cmd = { adapter = "sambanova" },
+                chat = { adapter = "lanlportal", },
+                inline = { adapter = "lanlportal" },
+                cmd = { adapter = "lanlportal" },
             },
             adapters = {
                 ollama = function()
@@ -594,6 +594,21 @@ require("lazy").setup({
                         schema = {
                             model = {
                                 default = "sambanova/Meta-Llama-3.3-70B-Instruct",
+                            },
+                        },
+                    })
+                end,
+                lanlportal = function()
+                    return require("codecompanion.adapters").extend("openai_compatible", {
+                        env = {
+                            url = "LANLPORTAL_URL",
+                            api_key = "LANLPORTAL_API_KEY",
+                            chat_url = "/v2/serve/chat/completions",
+                            models_endpoint = "/v2/serve/models",
+                        },
+                        schema = {
+                            model = {
+                                default = "anthropic.claude-3-7-sonnet-20250219-v1:0",
                             },
                         },
                     })
