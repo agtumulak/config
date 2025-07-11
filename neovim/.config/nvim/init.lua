@@ -563,9 +563,9 @@ require("lazy").setup({
         config = true,
         opts = {
             strategies = {
-                chat = { adapter = "ollama", },
-                inline = { adapter = "ollama" },
-                cmd = { adapter = "ollama" },
+                chat = { adapter = "sambanova", },
+                inline = { adapter = "sambanova" },
+                cmd = { adapter = "sambanova" },
             },
             adapters = {
                 ollama = function()
@@ -577,6 +577,21 @@ require("lazy").setup({
                         schema = {
                             model = {
                                 default = "llama3.3:latest",
+                            },
+                        },
+                    })
+                end,
+                sambanova = function()
+                    return require("codecompanion.adapters").extend("openai_compatible", {
+                        name = "sambanova",
+                        formatted_name = "SambaNova",
+                        env = {
+                            url = "SAMBANOVA_URL",
+                            api_key = "SAMBANOVA_API_KEY",
+                        },
+                        schema = {
+                            model = {
+                                default = "sambanova/Meta-Llama-3.3-70B-Instruct",
                             },
                         },
                     })
