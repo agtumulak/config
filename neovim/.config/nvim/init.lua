@@ -216,7 +216,7 @@ require("lazy").setup({
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gr",
                         function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
-                    vim.keymap.set({ "n", "v" }, "<leader>m",
+                    vim.keymap.set({ "n", "v" }, "f",
                         function() vim.lsp.buf.format { async = true } end, opts)
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
@@ -255,7 +255,7 @@ require("lazy").setup({
             -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
             lspconfig.pyright.setup {
                 on_attach = function(_, bufnr)
-                    vim.keymap.set("n", "<leader>m", function() vim.cmd "!black %" end,
+                    vim.keymap.set("n", "f", function() vim.cmd "!black %" end,
                         { buffer = bufnr, desc = "Autoformat with Black" })
                 end,
             }
@@ -359,6 +359,7 @@ require("lazy").setup({
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("ui-select")
+            telescope.load_extension("bookmarks")
             vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
         end,
     },
@@ -573,5 +574,22 @@ require("lazy").setup({
             vim.api.nvim_set_hl(0, "RenderMarkdownChecked", { link = "DiffAdd" })
             vim.api.nvim_set_hl(0, "RenderMarkdownUnchecked", { link = "@markup.list.unchecked.markdown" })
         end,
+    },
+    -- https://github.com/tomasky/bookmarks.nvim?tab=readme-ov-file#installation
+    {
+        "tomasky/bookmarks.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        config = function()
+            require("bookmarks").setup()
+        end,
+        keys = {
+            { "mm",        function() require("bookmarks").bookmark_toggle() end,           desc = "Add or remove bookmark at current line" },
+            { "ma",        function() require("bookmarks").bookmark_ann() end,              desc = "Add or edit mark annotation at current line" },
+            { "mc",        function() require("bookmarks").bookmark_clean() end,            desc = "Clean all marks in local buffer" },
+            { "[m",        function() require("bookmarks").bookmark_prev() end,             desc = "Jump to the previous mark in local buffer" },
+            { "]m",        function() require("bookmarks").bookmark_next() end,             desc = "Jump to the next mark in local buffer" },
+            { "mca",       function() require("bookmarks").bookmark_clear_all() end,        desc = "Clean all marks globally" },
+            { "<leader>m", function() require("telescope").extensions.bookmarks.list() end, desc = "Show marked file list" },
+        },
     },
 }, { ui = { border = "rounded" } })
