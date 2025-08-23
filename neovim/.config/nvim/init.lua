@@ -260,6 +260,16 @@ require("lazy").setup({
                     vim.keymap.set("n", "f", function() vim.cmd "!black %" end,
                         { buffer = bufnr, desc = "Autoformat with Black" })
                 end,
+                settings = {
+                    python = {
+                        analysis = {
+                            extraPaths = {
+                                vim.fn.trim(vim.fn.system("spack location --spack-root")) .. "/lib/spack/",
+                                vim.fn.trim(vim.fn.system("spack location --repo builtin")) .. "/../../",
+                            }
+                        }
+                    }
+                }
             })
             vim.lsp.enable { "pyright" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake

@@ -54,3 +54,6 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 bindkey -v # https://stackoverflow.com/a/58188295
 bindkey '^?' backward-delete-char # https://superuser.com/a/533685
+
+## spack
+source ~/Developer/spack/share/spack/setup-env.sh
