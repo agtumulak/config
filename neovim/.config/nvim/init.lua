@@ -250,6 +250,19 @@ require("lazy").setup({
             })
             vim.lsp.enable { "clangd" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
+            -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
+            vim.lsp.config("pyright", {
+                settings = {
+                    python = {
+                        analysis = {
+                            extraPaths = {
+                                vim.fn.trim(vim.fn.system("spack location --spack-root")) .. "/lib/spack/",
+                                vim.fn.trim(vim.fn.system("spack location --repo builtin")) .. "/../../",
+                            }
+                        }
+                    }
+                }
+            })
             vim.lsp.enable { "pyright" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake
             vim.lsp.enable { "cmake" }
