@@ -201,7 +201,6 @@ require("lazy").setup({
         -- https://github.com/LazyVim/LazyVim/blob/86ac9989ea15b7a69bb2bdf719a9a809db5ce526/lua/lazyvim/plugins/lsp/init.lua#L5
         event = LazyFile,
         config = function()
-            local lspconfig = require("lspconfig")
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
@@ -222,7 +221,7 @@ require("lazy").setup({
                 end,
             })
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-            lspconfig.lua_ls.setup {
+            vim.lsp.config("lua_ls", {
                 on_init = function(client)
                     local path = client.workspace_folders[1].name
                     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -239,9 +238,10 @@ require("lazy").setup({
                 end,
                 settings = { Lua = {} },
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            }
+            })
+            vim.lsp.enable { "lua_ls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
-            lspconfig.clangd.setup {
+            vim.lsp.config("clangd", {
                 cmd = {
                     "clangd",
                     "--background-index",
@@ -250,28 +250,31 @@ require("lazy").setup({
                 on_attach = function(client, bufnr)
                     require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
                 end
-            }
+            })
+            vim.lsp.enable { "clangd" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
             -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
-            lspconfig.pyright.setup {
+            vim.lsp.config("pyright", {
                 on_attach = function(_, bufnr)
                     vim.keymap.set("n", "f", function() vim.cmd "!black %" end,
                         { buffer = bufnr, desc = "Autoformat with Black" })
                 end,
-            }
+            })
+            vim.lsp.enable { "pyright" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake
-            lspconfig.cmake.setup {}
+            vim.lsp.enable { "cmake" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
-            lspconfig.jsonls.setup {}
+            vim.lsp.enable { "jsonls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-            lspconfig.yamlls.setup {
+            vim.lsp.config("yamlls", {
                 on_attach = function(_, bufnr)
                     vim.keymap.set("n", "<leader>m", function() vim.cmd "!yamlfmt %" end,
                         { buffer = bufnr, desc = "Autoformat with yamlfmt" })
                 end,
-            }
+            })
+            vim.lsp.enable { "yamlls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls
-            lspconfig.fortls.setup {}
+            vim.lsp.enable { "fortls" }
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
