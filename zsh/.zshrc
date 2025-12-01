@@ -63,6 +63,9 @@ autoload -Uz compinit && compinit -u
 
 export MANPAGER='nvim +Man!' # https://neovim.io/doc/user/filetype.html#ft-man-plugin
 
+# symlinks to binary overrides go here
+export path=(/Users/atumulak/.local/bin $path)
+
 ## aliases
 
 alias diff='delta'
