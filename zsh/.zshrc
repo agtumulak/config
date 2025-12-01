@@ -12,6 +12,11 @@ export path=("/Users/atumulak/Developer/MCNP/mcnp6-v6.3.1/build-gcc-15" $path)
 export FZF_CTRL_R_OPTS='--bind "esc:become:echo {q}"'
 eval "$(fzf --zsh)"
 
+# https://ghostty.org/docs/features/shell-integration
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+fi
+
 ## zsh
 
 # https://unix.stackexchange.com/a/389883
