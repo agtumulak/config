@@ -1,5 +1,8 @@
 ## system specific
 
+# spack
+source /Users/atumulak/Developer/spack/share/spack/setup-env.sh
+
 # mcnp
 export DATAPATH=/Users/atumulak/Developer/ndatk-data
 export path=("/Users/atumulak/Developer/MCNP/mcnp6-v6.3.1/build-gcc-15" $path)
