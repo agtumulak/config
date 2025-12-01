@@ -7,6 +7,16 @@ source /Users/atumulak/Developer/spack/share/spack/setup-env.sh
 export DATAPATH=/Users/atumulak/Developer/ndatk-data
 export path=("/Users/atumulak/Developer/MCNP/mcnp6-v6.3.1/build-gcc-15" $path)
 
+# claude code
+# export ANTHROPIC_BASE_URL="https://aiportal-api.ds.aws.lanl.gov"
+# export ANTHROPIC_BASE_URL="https://aiportal-api.stage.aws.lanl.gov"
+export ANTHROPIC_BASE_URL="https://aiportal-api.aws.lanl.gov"
+export ANTHROPIC_AUTH_TOKEN=""
+export ANTHROPIC_MODEL="anthropic.claude-sonnet-4-5-20250929-v1:0"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic.claude-3-haiku-20240307-v1:0"
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+
 # enable fzf
 # https://github.com/junegunn/fzf/issues/3528
 export FZF_CTRL_R_OPTS='--bind "esc:become:echo {q}"'
