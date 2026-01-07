@@ -1,4 +1,6 @@
 # enable fzf
+# https://github.com/junegunn/fzf/issues/3528
+export FZF_CTRL_R_OPTS='--bind "esc:become:echo {q}"'
 eval "$(fzf --zsh)"
 
 ## zsh
