@@ -284,23 +284,22 @@ require("lazy").setup({
             "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"
         }
     },
-    -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
+    -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#installation
     {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        event = { LazyFile, "VeryLazy" },
-        main = "nvim-treesitter.configs",
-        opts = {
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-            modules = {},
-            ignore_install = {},
-            sync_install = false,
-            auto_install = true,
-            highlight = { enable = true },
-        },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-            require("nvim-treesitter.install").compilers = { "clang" }
+        'nvim-treesitter/nvim-treesitter',
+        lazy = false,
+        build = ':TSUpdate',
+        init = function()
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = { "c", "cpp", "lua", "vim", "vimdoc", "query" },            -- used by render-markdown.nvim
+                callback = function()
+                    vim.treesitter.start()                                            -- highlighting
+                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'               -- folds
+                    vim.wo.foldmethod = 'expr'
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- indentation
+                    vim.opt.foldenable = false
+                end,
+            })
         end,
     },
     -- https://github.com/nvim-treesitter/nvim-treesitter-context?tab=readme-ov-file#configuration
