@@ -312,7 +312,7 @@ require("lazy").setup({
     -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#installation
     {
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
+        version = "*",
         event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -320,8 +320,7 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build =
-                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+                build = "make"
             },
             "nvim-telescope/telescope-ui-select.nvim",
         },
