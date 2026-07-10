@@ -1,9 +1,5 @@
 ## system specific
 
-# see ``RedHat 8 systems status'' email by 'frederick@lanl.gov'
-source /opt/local/software/RHEL8/modules/modules-5.4.0/init/profile.sh
-source /opt/local/software/RHEL8/modules/modules-5.4.0/init/fixpath.sh
-
 # make packages available
 module use /opt/local/packages/Modules/default/modulefiles/debugger # gdb, totalview
 module use /opt/local/packages/Modules/default/modulefiles/compiler # needed by mcnp6 module
