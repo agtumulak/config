@@ -216,7 +216,7 @@ require("lazy").setup({
                     vim.keymap.set("n", "gr",
                         function() require("telescope.builtin").lsp_references { show_line = false, } end, opts)
                     vim.keymap.set({ "n", "v" }, "f",
-                        function() vim.lsp.buf.format { async = true } end, opts)
+                        function() require("conform").format { async = true } end, opts)
                     vim.keymap.set("n", "<C-s>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
                 end,
             })
@@ -253,28 +253,41 @@ require("lazy").setup({
             })
             vim.lsp.enable { "clangd" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright
-            -- Proxy needs to be set for NPM: https://stackoverflow.com/a/10304317
-            vim.lsp.config("pyright", {
-                on_attach = function(_, bufnr)
-                    vim.keymap.set("n", "f", function() vim.cmd "!black %" end,
-                        { buffer = bufnr, desc = "Autoformat with Black" })
-                end,
-            })
             vim.lsp.enable { "pyright" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cmake
             vim.lsp.enable { "cmake" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
             vim.lsp.enable { "jsonls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-            vim.lsp.config("yamlls", {
-                on_attach = function(_, bufnr)
-                    vim.keymap.set("n", "<leader>m", function() vim.cmd "!yamlfmt %" end,
-                        { buffer = bufnr, desc = "Autoformat with yamlfmt" })
-                end,
-            })
             vim.lsp.enable { "yamlls" }
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls
             vim.lsp.enable { "fortls" }
+        end,
+    },
+    -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#setup
+    {
+        "stevearc/conform.nvim",
+        event = LazyFile,
+        cmd = "ConformInfo",
+        opts = {
+            formatters_by_ft = {
+                css = { "prettier" },
+                python = { "black" },
+                yaml = { "yamlfmt" },
+            },
+            -- fall back to the LSP for filetypes with no CLI formatter above
+            default_format_opts = { lsp_format = "fallback" },
+        },
+        -- `f` in LSP buffers comes from LspAttach; this covers the rest
+        init = function(plugin)
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = vim.tbl_keys(plugin.opts.formatters_by_ft),
+                callback = function(ev)
+                    vim.keymap.set({ "n", "v" }, "f",
+                        function() require("conform").format { async = true } end,
+                        { buffer = ev.buf, desc = "Format buffer" })
+                end,
+            })
         end,
     },
     -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
