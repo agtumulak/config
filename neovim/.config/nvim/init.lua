@@ -28,9 +28,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- https://github.com/LazyVim/LazyVim/discussions/1583
-local LazyFile = { "BufReadPost", "BufWritePost", "BufNewFile" }
-
 require("lazy").setup({
     -- https://github.com/RRethy/base16-nvim?tab=readme-ov-file#nvim-base16
     {
@@ -198,8 +195,7 @@ require("lazy").setup({
                 end,
             },
         },
-        -- https://github.com/LazyVim/LazyVim/blob/86ac9989ea15b7a69bb2bdf719a9a809db5ce526/lua/lazyvim/plugins/lsp/init.lua#L5
-        event = LazyFile,
+        event = "VeryLazy",
         config = function()
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -267,7 +263,6 @@ require("lazy").setup({
     -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#setup
     {
         "stevearc/conform.nvim",
-        event = LazyFile,
         cmd = "ConformInfo",
         opts = {
             formatters_by_ft = {
@@ -326,7 +321,6 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         version = "*",
-        event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "jonarrien/telescope-cmdline.nvim",
@@ -410,7 +404,7 @@ require("lazy").setup({
     -- https://github.com/lewis6991/gitsigns.nvim?tab=readme-ov-file#keymaps
     {
         "lewis6991/gitsigns.nvim",
-        event = LazyFile,
+        event = "VeryLazy",
         branch = "release",
         opts = {
             on_attach = function(bufnr)
@@ -443,7 +437,7 @@ require("lazy").setup({
     -- https://github.com/lukas-reineke/indent-blankline.nvim
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = LazyFile,
+        event = "VeryLazy",
         main = "ibl",
         opts = {
             indent = { char = "▏" },
