@@ -344,7 +344,7 @@ require("lazy").setup({
     },
     -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#installation
     {
-        'nvim-treesitter/nvim-treesitter',
+        'agtumulak/nvim-treesitter',
         lazy = false,
         build = ':TSUpdate',
         init = function()
@@ -374,7 +374,7 @@ require("lazy").setup({
         dependencies = {
             "nvim-lua/plenary.nvim",
             "jonarrien/telescope-cmdline.nvim",
-            "nvim-treesitter/nvim-treesitter",
+            "nvim-treesitter", -- resolves to the agtumulak fork spec above
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make"
@@ -606,7 +606,7 @@ require("lazy").setup({
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
+            "nvim-treesitter", -- resolves to the agtumulak fork spec above
         },
         keys = {
             {
