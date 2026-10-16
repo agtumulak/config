@@ -269,7 +269,8 @@ require("lazy").setup({
                 css = { "prettier" },
                 python = { "black" },
                 yaml = { "yamlfmt" },
-                tex = { "tex-fmt" }
+                tex = { "tex-fmt" },
+                make = { "bake" },
             },
             -- fall back to the LSP for filetypes with no CLI formatter above
             default_format_opts = { lsp_format = "fallback" },
